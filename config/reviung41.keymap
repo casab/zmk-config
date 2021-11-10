@@ -80,7 +80,7 @@
 #define _QWERTY 0
 #define _LOWER 1
 #define _RAISE 2
-#define _SPACE 3
+#define _UTIL 3
 #define _NUMPAD 4
 // #define _SODA 5
 #define _ADJUST 5
@@ -100,12 +100,12 @@
 // |Npd/ESC|  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U   |  I  |  O  |  P  |   BKSP  |
 // |Sft/Cps|  A  |  S  |  D  |  F  |  G  |   |  H  |  J   |  K  |  L  |  Ş  |    İ    |
 // |LCtlTab|  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  Ö  |  Ç  |  .  | LCtlEnt |
-//                         |LGUI/$| LWR/, | SPC* | RSE/"  | ALT/@ |
+//                         |LGUI/$| LWR/, |  SPC  | RSE/"  | ALT/@ |
                         bindings = <
    &lt _NUMPAD ESC  &kp Q  &kp W  &kp E  &kp R  &kp T           &kp Y  &kp U  &kp I  &kp O  &kp P  &kp BSPC
    &mt LSHFT CLCK  &kp A  &kp S  &kp D  &kp F  &kp G            &kp H  &kp J  &kp K  &kp L  &kp SEMI  &kp SQT
    &mt LCTRL TAB  &kp Z  &kp X  &kp C  &kp V  &kp B             &kp N  &kp M  &kp COMMA  &kp DOT  &kp FSLH  &mt LCTRL RET
-        &mt LGUI _DOLLAR_SIGN  &lt _LOWER BSLH    &lt _SPACE SPACE    &lt _RAISE NON_US_BACKSLASH  &mt LALT _AT_SIGN
+        &mt LGUI _DOLLAR_SIGN  &lt _LOWER BSLH      &kp SPACE    &lt _RAISE NON_US_BACKSLASH  &mt LALT _AT_SIGN
                         >;
                 };
 
@@ -114,12 +114,12 @@
 // |  >  |  !  |  '  |  ^  |  +  |  %  |   |  &  |  /  |  (  |  )  |  =  |   BKSP    |
 // | F1  | F2  | F3  | F4  | F5  | F6  |   | "$" |  ?  |  _  |  Ğ  |  Ü  |     -     |
 // | F7  | F8  | F9  | F10 | F11 | F12 |   | "[" | "]" | "{" | "}" |  <  |    ">"    |
-//                       | F13  |    |  RET  | ADJ | F14 |
+//                       | UTIL  |    |  RET  | ADJ | F14 |
                         bindings = <
    &kp TILDE  &kp EXCL  &kp AT  &kp HASH  &kp DLLR  &kp PRCNT           &kp CARET  &kp AMPS  &kp ASTERISK  &kp LPAR  &kp RPAR  &kp BSPC
    &kp F1  &kp F2  &kp F3  &kp F4  &kp F5  &kp F6                       &kp _DOLLAR_SIGN  &kp UNDERSCORE &kp PLUS  &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp EQUAL
    &kp F7  &kp F8  &kp F9  &kp F10  &kp F11  &kp F12                    &kp _SQUARE_OPEN  &kp _SQUARE_CLOSE  &kp _CURLY_OPEN  &kp _CURLY_CLOSE  &kp GRAVE  &mt LSHFT GRAVE
-                        &kp F13  &trans    &kp RET    &mo _ADJUST  &kp F14 /* TODO */
+                        &lt _UTIL  &trans    &kp RET    &mo _ADJUST  &kp F14 /* TODO */
                         >;
                 };
 
@@ -138,17 +138,17 @@
                 };
 
 
-                space_layer {
+                util_layer {
 // -----------------------------------------------------------------------------------------
 // |     |CMD+1|CMD+2|CMD+3|CMD+4|CMD+5|   | CMD+6 |CMD+7|CMD+8|CMD+9|CMD+0|LckOSX|
 // |     |Brgt▼|Brgt▲|     |     |     |   | Left  |Down | Up  |Right|     |      |
 // |     |     |     |     |     |     |   |PlayPse|     |     |     |     |      |
-//                  |  Vol-    | Prev |     | Next  |  Vol+   |
+//                  |          |      | Next  |  Vol-  |  Vol+   |
                         bindings = <
    &trans  &kp LG(N1)  &kp LG(N2)  &kp LG(N3)  &kp LG(N4)  &kp LG(N5)           &kp LG(N6)  &kp LG(N7)  &kp LG(N8)  &kp LG(N9)  &kp LG(N0)  &kp _LOCKSCREEN
    &trans  &kp C_BRI_INC  &kp C_BRI_DEC &trans &trans &trans                    &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT  &trans  &trans
    &trans  &trans  &trans  &trans  &trans  &trans                               &kp C_PLAY_PAUSE  &trans  &trans  &trans  &trans  &trans
-                        &kp C_VOL_DN  &kp C_PREV    &trans    &kp C_NEXT     &kp C_VOL_UP /* TODO arrow keys instead of media keys ?*/
+                        &trans         &trans        &kp C_NEXT    &kp C_VOL_DN     &kp C_VOL_UP /* TODO arrow keys instead of media keys ?*/
                         >;
                 };
 
