@@ -111,26 +111,26 @@
 
                 lower_layer {
 // ----------------------------------------------------------------------------------
-// |  >  |  !  |  '  |  ^  |  +  |  %  |   |  &  |  /  |  (  |  )  |  =  |   BKSP    |
+// |  >  |  !  |  '  |  ^  |  +  |  %  |   |  &  |  /  |  (  |  )  |  =  |      ?    |
 // | F1  | F2  | F3  | F4  | F5  | F6  |   | "$" |  ?  |  _  |  Ğ  |  Ü  |     -     |
 // | F7  | F8  | F9  | F10 | F11 | F12 |   | "[" | "]" | "{" | "}" |  <  |    ">"    |
-//                       | UTIL  |    |  RET  | ADJ | F14 |
+//                       | UTIL  |    |  BKSP | ADJ | F14 |
                         bindings = <
-   &kp TILDE  &kp EXCL  &kp AT  &kp HASH  &kp DLLR  &kp PRCNT           &kp CARET  &kp AMPS  &kp ASTERISK  &kp LPAR  &kp RPAR  &kp BSPC
+   &kp TILDE  &kp EXCL  &kp AT  &kp HASH  &kp DLLR  &kp PRCNT           &kp CARET  &kp AMPS  &kp ASTERISK  &kp LPAR  &kp RPAR  &kp UNDERSCORE
    &kp F1  &kp F2  &kp F3  &kp F4  &kp F5  &kp F6                       &kp _DOLLAR_SIGN  &kp UNDERSCORE &kp PLUS  &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp EQUAL
    &kp F7  &kp F8  &kp F9  &kp F10  &kp F11  &kp F12                    &kp _SQUARE_OPEN  &kp _SQUARE_CLOSE  &kp _CURLY_OPEN  &kp _CURLY_CLOSE  &kp GRAVE  &mt LSHFT GRAVE
-                        &lt _UTIL  &trans    &kp RET    &mo _ADJUST  &kp F14 /* TODO */
+                        &lt _UTIL  &trans    &kp BSPC    &mo _ADJUST  &kp F14 /* TODO */
                         >;
                 };
 
                 raise_layer {
 // -----------------------------------------------------------------------------------------
-// | Tab |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  | Bksp |
+// | Tab |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  |  *   |
 // | F1  | F2  | F3  | F4  | F5  | F6  |   |     |  *  |  -  | "\" | "|" |  ,   |
 // | F7  | F8  | F9  | F10 | F11 | F12 |   |  '  |  #  |  "  | "~" | "`" |  <>| |
 //                       |     | ADJ | BKSP |    |     |
                         bindings = <
-   &kp TAB  &kp N1  &kp N2  &kp N3  &kp N4  &kp N5              &kp N6  &kp N7  &kp N8  &kp N9  &kp N0  &kp BSPC
+   &kp TAB  &kp N1  &kp N2  &kp N3  &kp N4  &kp N5              &kp N6  &kp N7  &kp N8  &kp N9  &kp N0  &kp MINUS
    &kp F1  &kp F2  &kp F3  &kp F4  &kp F5  &kp F6     /*Todo ?*/&trans  &kp MINUS  &kp EQUAL  &kp _BACKSLASH  &kp _VERTICAL_PIPE  &kp BACKSLASH
    &kp F7  &kp F8  &kp F9  &kp F10  &kp F11  &kp F12            &kp AT_SIGN  &kp _NUMBER_SIGN  &kp NON_US_BSLH  &kp _TILDE  &kp _BACKTICK  &kp GRAVE
                         /* TODO */ &trans  &mo _ADJUST    &kp BSPC    &trans    &trans /* TODO */
