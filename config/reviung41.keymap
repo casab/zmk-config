@@ -120,12 +120,12 @@
 
                 default_layer {
 // -------------------------------------------------------------------------------------
-// |Npd/ESC|  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U/Ü |  I  |  O  |  P  | RSft/BKSP|
+// |Npd/ESC|  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U/Ü |  I  | O/Ö |  P  | RSft/BKSP|
 // |Sft/Cps|  A  |  S  |  D  |  F  | G/Ğ |   |  H  |  J   |  K  |  L  |  Ş  |    İ     |
 // |LCtlTab|  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  Ö  |  Ç  |  .  | RCtlEnt  |
 //                         |LGUI | LWR/, |  SPC  | RSE/"  | ALT  |
                         bindings = <
-   &lt _NUMPAD ESC  &kp Q  &kp W  &kp E  &kp R  &kp T                &kp Y  &h_alt RIGHT_BRACKET U  &kp I  &kp O  &kp P  &hom RSHFT BSPC
+   &lt _NUMPAD ESC  &kp Q  &kp W  &kp E  &kp R  &kp T                &kp Y  &h_alt RIGHT_BRACKET U  &kp I  &h_alt COMMA O  &kp P  &hom RSHFT BSPC
    &mt LSHFT CLCK  &kp A  &kp S  &kp D  &kp F  &h_alt LEFT_BRACKET G      &kp H  &kp J  &kp K  &kp L  &kp SEMI  &kp SQT
    &mt LCTRL TAB  &kp Z  &kp X  &kp C  &kp V  &kp B                 &kp N  &kp M  &kp COMMA  &kp DOT  &kp FSLH  &mt RCTRL RET
         &kp LGUI       &lt _LOWER BSLH          &kp SPACE    &lt _RAISE GRAVE    &kp LALT
@@ -135,13 +135,13 @@
                 lower_layer {
 // -------------------------------------------------------------------------------
 // |  "  |  !  |  '  |  ^  |  +  |  %  |   |  &  |  /  |  (  |  )  |  =  |   ?   |
-// |  <  |  >  |  `  |  #  |  $  |     |   |Left |Down | Up  |Right|  Ğ  |   Ü   |
-// | "|" |  @  |     |     |     |     |   |  *  | "{" | "[" | "]" | "}" |   -   |
+// |  <  |  >  |  `  |  #  |  $  |     |   |Left |Down | Up  |Right|  *  |   -   |            // &kp LEFT_BRACKET  &kp RIGHT_BRACKET for Ğ and Ü
+// | "|" |  @  |     |     |     |     |   |     | "{" | "[" | "]" | "}" |   _   |
 //                       |      |    |  DEL | UTIL | F14 |
                         bindings = <
    &kp GRAVE     &kp EXCL  &kp AT  &kp HASH  &kp DLLR  &kp PRCNT                                       &kp CARET  &kp AMPS  &kp ASTERISK  &kp LPAR &kp RPAR  &kp UNDERSCORE
-   &kp NON_US_BSLH  &kp LS(NON_US_BSLH) &kp _BACKTICK  &kp _NUMBER_SIGN  &kp _DOLLAR_SIGN  &none        &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT &kp LEFT_BRACKET  &kp RIGHT_BRACKET
-   &kp _VERTICAL_PIPE  &kp _AT_SIGN  &none  &none  &none  &none                                                       &kp MINUS  &kp _CURLY_OPEN  &kp _SQUARE_OPEN  &kp _SQUARE_CLOSE  &kp _CURLY_CLOSE  &kp EQUAL
+   &kp NON_US_BSLH  &kp LS(NON_US_BSLH) &kp _BACKTICK  &kp _NUMBER_SIGN  &kp _DOLLAR_SIGN  &none        &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT &kp MINUS  &kp EQUAL
+   &kp _VERTICAL_PIPE  &kp _AT_SIGN  &none  &none  &none  &none                                                       &none  &kp _CURLY_OPEN  &kp _SQUARE_OPEN  &kp _SQUARE_CLOSE  &kp _CURLY_CLOSE  &kp PLUS
                                                              &trans  &trans    &kp DEL    &mo _UTIL  &trans
                         >;
                 };
@@ -150,12 +150,12 @@
 // -------------------------------------------------------------------------------
 // |  "  |  !  |  '  |  ^  |  +  |  %  |   |  &  |  /  |  (  |  )  |  =  |   ?   |
 // |  <  |  >  |  `  |  #  |  $  |     |   |Home |PgDwn|PgUp |End  | "\" |  "~"  |
-// | "|" |  @  |     |     |     |     |   |  *  | "{" | "[" | "]" | "}" |   _   |
+// | "|" |  @  |     |     |     |     |   |     | "{" | "[" | "]" | "}" |   _   |
 //                       |     | UTIL | DEL |    |     |
                         bindings = <
    &kp GRAVE     &kp EXCL  &kp AT  &kp HASH  &kp DLLR  &kp PRCNT                                       &kp CARET  &kp AMPS  &kp ASTERISK  &kp LPAR &kp RPAR  &kp UNDERSCORE
    &kp NON_US_BSLH  &kp LS(NON_US_BSLH) &kp _BACKTICK  &kp _NUMBER_SIGN  &kp _DOLLAR_SIGN  &none        &kp HOME  &kp PAGE_DOWN  &kp PAGE_UP  &kp END &kp _BACKSLASH  &kp _TILDE
-   &kp _VERTICAL_PIPE  &kp _AT_SIGN  &none  &none  &none  &none                                                       &kp MINUS  &kp _CURLY_OPEN  &kp _SQUARE_OPEN  &kp _SQUARE_CLOSE  &kp _CURLY_CLOSE  &kp PLUS
+   &kp _VERTICAL_PIPE  &kp _AT_SIGN  &none  &none  &none  &none                                                       &none  &kp _CURLY_OPEN  &kp _SQUARE_OPEN  &kp _SQUARE_CLOSE  &kp _CURLY_CLOSE  &kp PLUS
                                                         &trans  &mo _UTIL    &kp DEL    &trans    &trans 
                         >;
                 };
