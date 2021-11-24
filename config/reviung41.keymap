@@ -142,14 +142,14 @@
 
                 lower_layer {
 // -------------------------------------------------------------------------------
-// |    "   |  !  |  '  |  ^  |  +  |  %  |   |  &  |  /  |  (  |  )  |  =  |   ?   |
-// |    <   |  >  |  `  |  #  |  $  |     |   |Left |Down | Up  |Right|  *  |   -   |            // &kp LEFT_BRACKET  &kp RIGHT_BRACKET for Ğ and Ü
-// |ALT(TAB)|  @  |     |     |     |     |   |     | "{" | "[" | "]" | "}" |   _   |
+// |  "  |  !  |  '  |  ^  |  +  |  %  |   |  &  |  /  |  (  |  )  |  =  |   ?   |
+// |  <  |  >  |  `  |  #  |  $  |     |   |Left |Down | Up  |Right|  *  |   -   |            // &kp LEFT_BRACKET  &kp RIGHT_BRACKET for Ğ and Ü
+// | "|" |  @  |     |     |     |     |   |     | "{" | "[" | "]" | "}" |   _   |
 //                       |      |    |  DEL | UTIL | F14 |
                         bindings = <
    &kp GRAVE     &kp EXCL  &kp AT  &kp HASH  &kp DLLR  &kp PRCNT                                       &kp CARET  &kp AMPS  &kp ASTERISK  &kp LPAR &kp RPAR  &kp UNDERSCORE
    &kp NON_US_BSLH  &kp LS(NON_US_BSLH) &kp _BACKTICK  &kp _NUMBER_SIGN  &kp _DOLLAR_SIGN  &none        &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT &kp MINUS  &kp EQUAL
-   &kp LA(TAB)  &kp _AT_SIGN  &none  &none  &none  &none                                                       &none  &kp _CURLY_OPEN  &kp _SQUARE_OPEN  &kp _SQUARE_CLOSE  &kp _CURLY_CLOSE  &kp PLUS
+   &kp _VERTICAL_PIPE  &kp _AT_SIGN  &none  &none  &none  &none                                                       &none  &kp _CURLY_OPEN  &kp _SQUARE_OPEN  &kp _SQUARE_CLOSE  &kp _CURLY_CLOSE  &kp PLUS
                                                              &trans  &trans    &kp DEL    &mo _UTIL  &trans
                         >;
                 };
