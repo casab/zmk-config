@@ -119,13 +119,6 @@
                         bindings = <&kp>, <&kp>;
                         mods = <MOD_RSFT>;
                 };
-                towa: tap_only_with_alt {
-                        compatible = "zmk,behavior-mod-morph";
-                        label = "TAP_ONLY_WITH_ALT";
-                        #binding-cells = <0>;
-                        bindings = <&kp>, <&kp>;
-                        mods = <(MOD_LALT|MOD_RALT)>;
-                };
         };
 
 
