@@ -120,7 +120,7 @@
                         mods = <(RSHFT)>;
                 }; 
                 mmnet: mm_numpad_escape_tab {
-                        compatible = "zmk,behavior-mod-morph";
+                        compatible = "zmk,behavior-mod-tap";
                         label = "MM_NUMPAD_ESCAPE_TAB";
                         #binding-cells = <0>;
                         bindings = <&lt _NUMPAD ESC>, <&kp TAB>;
