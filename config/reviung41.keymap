@@ -79,12 +79,11 @@
 
 // Layers
 #define _QWERTY 0
-#define _MAC 1
-#define _GAMING 2
-#define _LOWER 3
-#define _RAISE 4
-#define _NUMPAD 5
-#define _UTIL 6
+#define _GAMING 1
+#define _LOWER 2
+#define _RAISE 3
+#define _NUMPAD 4
+#define _UTIL 5
 
 
 
@@ -161,7 +160,7 @@
         &h_alt LALT LGUI        &mmlic          &kp SPACE    &lt _RAISE GRAVE    &kp RALT
                         >;
                 };
-
+/*
                 mac_layer {
 // -------------------------------------------------------------------------------------
 // |Npd/ESC/T|  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U/Ü |  I  |  O  |  P  | RSft/BKSP|
@@ -175,11 +174,12 @@
         &kp LGUI         &lt _LOWER BSLH          &kp SPACE    &lt _RAISE GRAVE    &kp RALT
                         >;
                 };
+*/
 
                 gaming_layer {
 // -------------------------------------------------------------------------------------
 // |Npd/ESC/T|  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U/Ü |  I  |  O  |  P  | RSft/BKSP|
-// |  Sft    |  A  |  S  |  D  |  F  | G/Ğ |   |  H  |  J   |  K  |  L  |  Ş  |    İ     |
+// |  Sft    |  A  |  S  |  D  |  F  | G/Ğ |   |  H  |  J   |  K  |  L  |  Ş  |   İ/TAB  |
 // |  LCtl   |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  Ö  |  Ç  |  .  | RCtlEnt  |
 //                     |   ALT   | LWR/, |  SPC  |  RSE/"  | Tog Gaming  |
                         bindings = <
@@ -258,7 +258,7 @@
    &rgb_ug RGB_BRI &rgb_ug RGB_SAI &rgb_ug RGB_HUI &rgb_ug RGB_EFF &none &rgb_ug RGB_TOG    &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4 &bt BT_CLR
    &rgb_ug RGB_BRD &rgb_ug RGB_SAD &rgb_ug RGB_HUD &rgb_ug RGB_EFR &none &none              &none        &none        &none        &none        &none        &reset
    &kp C_BRI_DEC  &kp C_BRI_INC  &kp C_PREV &kp C_NEXT  &kp C_VOL_DN &kp C_VOL_UP           &kp C_PLAY_PAUSE  &none        &none        &none    &ext_power EP_TOG        &bootloader
-                                                      &trans      &trans       &tog _MAC        &trans      &tog _GAMING
+                                                      &trans      &trans       &tog _GAMING        &trans      &trans
                         >;
                 };
         };
