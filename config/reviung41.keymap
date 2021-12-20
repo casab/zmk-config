@@ -150,7 +150,7 @@
 //                      |LGUI/ALT | LWR/, |  SPC  | RSE/"  | ALT  |
                         bindings = <
    &mmnet  &kp Q  &kp W  &kp E  &kp R  &kp T                &kp Y  &h_alt RIGHT_BRACKET U  &kp I  &kp O  &kp P  &hom RSHFT BSPC
-   &mt_cw LSHFT 0  &kp A  &kp S  &kp D  &kp F  &h_alt LEFT_BRACKET G      &kp H  &kp J  &kp K  &kp L  &kp SEMI  &kp SQT
+   &mt_cw LSHFT  &kp A  &kp S  &kp D  &kp F  &h_alt LEFT_BRACKET G      &kp H  &kp J  &kp K  &kp L  &kp SEMI  &kp SQT
    &mt LCTRL TAB  &kp Z  &kp X  &kp C  &kp V  &kp B                 &kp N  &kp M  &kp COMMA  &kp DOT  &kp FSLH  &mt RCTRL RET
         &h_alt LALT LGUI        &mmlic          &kp SPACE    &lt _RAISE GRAVE    &kp RALT
                         >;
@@ -164,7 +164,7 @@
 //                      |  CMD  | LWR/, |  SPC  | RSE/"  | ALT  |
                         bindings = <
    &mmnet  &kp Q  &kp W  &kp E  &kp R  &kp T                &kp Y  &h_alt RIGHT_BRACKET U  &kp I  &kp O  &kp P  &hom RSHFT BSPC
-   &mt LSHFT CLCK  &kp A  &kp S  &kp D  &kp F  &h_alt LEFT_BRACKET G      &kp H  &kp J  &kp K  &kp L  &kp SEMI  &kp SQT
+   &mt_cw LSHFT  &kp A  &kp S  &kp D  &kp F  &h_alt LEFT_BRACKET G      &kp H  &kp J  &kp K  &kp L  &kp SEMI  &kp SQT
    &mt LCTRL TAB  &kp Z  &kp X  &kp C  &kp V  &kp B                 &kp N  &kp M  &kp COMMA  &kp DOT  &kp FSLH  &mt RCTRL RET
         &kp LGUI         &lt _LOWER BSLH          &kp SPACE    &lt _RAISE GRAVE    &kp RALT
                         >;
@@ -218,12 +218,12 @@
 // |     |     |     |     |     |     |   |  =  |Num7 |Num8 |Num9 |  -  |Bcksp |
 // | F1  | F2  | F3  | F4  | F5  | F6  |   |  .  |Num4 |Num5 |Num6 |  +  |  *   |
 // | F7  | F8  | F9  | F10 | F11 | F12 |   |  ,  |Num1 |Num2 |Num3 |  .  |  /   |
-//                   |      |     | Enter |  Num0  |  Num0   |
+//                   |      |     | SPC |  Num0  |  Num0   |
                         bindings = <
    &none  &none  &none  &none  &none  &none                     &kp KP_EQUAL  &kp N7  &kp N8  &kp N9  &kp KP_MINUS  &kp BSPC
    &kp F1  &kp F2  &kp F3  &kp F4  &kp F5  &kp F6                     &kp SLASH  &kp N4  &kp N5  &kp N6  &kp KP_PLUS  &kp MINUS
    &kp F7  &kp F8  &kp F9  &kp F10  &kp F11  &kp F12                     &kp KP_DOT &kp N1  &kp N2  &kp N3  &kp SLASH  &kp KP_SLASH
-                                &none  &none    &kp RET   &kp N0   &kp N0 
+                                &none  &none    &kp SPACE   &kp N0   &kp N0 
                         >;
                 };
 
