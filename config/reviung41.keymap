@@ -202,7 +202,7 @@
    &kp LG(TAB)     &kp LG(Q)  &kp LG(W)  &kp LG(E)  &kp LG(R)  &kp LG(T)                    &kp CARET  &kp AMPS  &kp ASTERISK  &kp LPAR &kp RPAR  &kp UNDERSCORE
    &mo _CMDSHIFT &kp LG(A) &kp LG(S) &kp LG(D) &kp LG(F) &kp LG(G)                     &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT &kp MINUS  &kp EQUAL
    &kp LG(LCTRL)  &kp LG(Z) &kp LG(X) &kp LG(C) &kp LG(V) &kp LG(B)                  &none  &kp _CURLY_OPEN  &kp _SQUARE_OPEN  &kp _SQUARE_CLOSE  &kp _CURLY_CLOSE  &kp PLUS
-                                                             &trans  &trans    &kp DEL    &lt _UTIL LG(GRAVE) &trans
+                                             &kp LG(LALT)  &trans    &kp LG(SPACE)    &lt _UTIL LG(GRAVE) &trans
                         >;
                 };
 
@@ -216,7 +216,7 @@
    &kp LG(LS(TAB))  &kp LG(LS(Q))  &kp LG(LS(W))  &kp LG(LS(E))  &kp LG(LS(R))  &kp LG(LS(T))                &kp LG(LS(Y))  &kp LG(LS(U))  &kp LG(LS(I))  &kp LG(LS(O))  &kp LG(LS(P))  &none
    &trans        &kp LG(LS(A))  &kp LG(LS(S))  &kp LG(LS(D))  &kp LG(LS(F))  &kp LG(LS(G))                  &kp LG(LS(H))  &kp LG(LS(J))  &kp LG(LS(K))  &kp LG(LS(L))  &kp LG(LS(SEMI))  &kp LG(LS(SQT))
    &kp LG(LS(LCTRL)) &kp LG(LS(Z))  &kp LG(LS(X))  &kp LG(LS(C))  &kp LG(LS(V))  &kp LG(LS(B))           &kp LG(LS(N))  &kp LG(LS(M))  &kp LG(LS(COMMA))  &kp LG(LS(DOT))  &kp LG(LS(FSLH))  &none
-                          &kp LG(LS(LALT))        &none          &kp LG(SPACE)    &lt _RAISE GRAVE    &kp RALT
+                          &kp LG(LS(LALT))        &none          &kp LG(LS(SPACE))    &lt _RAISE GRAVE    &kp RALT
                         >;
                 };
                 raise_layer {
