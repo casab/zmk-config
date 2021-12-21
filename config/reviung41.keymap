@@ -202,7 +202,7 @@
    &kp LG(TAB)     &kp LG(Q)  &kp LG(W)  &kp LG(E)  &kp LG(R)  &kp LG(T)                    &kp CARET  &kp AMPS  &kp ASTERISK  &kp LPAR &kp RPAR  &kp UNDERSCORE
    &mo _CMDSHIFT &kp LG(A) &kp LG(S) &kp LG(D) &kp LG(F) &kp LG(G)                     &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT &kp MINUS  &kp EQUAL
    &kp LG(LCTRL)  &kp LG(Z) &kp LG(X) &kp LG(C) &kp LG(V) &kp LG(B)                  &none  &kp _CURLY_OPEN  &kp _SQUARE_OPEN  &kp _SQUARE_CLOSE  &kp _CURLY_CLOSE  &kp PLUS
-                                                             &trans  &trans    &kp DEL    &lt _UTIL GRAVE &trans
+                                                             &trans  &trans    &kp DEL    &lt _UTIL LG(GRAVE) &trans
                         >;
                 };
 
