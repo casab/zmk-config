@@ -136,7 +136,7 @@
                 mt_cw: mod_tap_caps_word {
                         compatible = "zmk,behavior-hold-tap";
                         label = "MT_CW";
-                        #binding-cells = <0>;
+                        #binding-cells = <1>;
                         tapping-term-ms = <70>;
                         flavor = "hold-preferred";
                         retro-tap;
