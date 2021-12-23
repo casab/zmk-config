@@ -137,9 +137,17 @@
                         compatible = "zmk,behavior-hold-tap";
                         label = "MT_CW";
                         #binding-cells = <2>;
-                        tapping-term-ms = <70>;
+                        tapping-term-ms = <100>;
                         flavor = "hold-preferred";
                         bindings = <&kp>, <&prog_caps>;
+                };
+                fmt: faster_mod_tap {
+                        compatible = "zmk,behavior-hold-tap";
+                        label = "FASTER_MOD_tap";
+                        #binding-cells = <2>;
+                        tapping-term-ms = <100>;
+                        flavor = "hold-preferred";
+                        bindings = <&kp>, <&kp>;
                 };
         };
 
@@ -156,7 +164,7 @@
                         bindings = <
    &mmnet  &kp Q  &kp W  &kp E  &kp R  &kp T                &kp Y  &h_alt RIGHT_BRACKET U  &kp I  &kp O  &kp P  &hom RSHFT BSPC
    &mt_cw LSHFT 0  &kp A  &kp S  &kp D  &kp F  &h_alt LEFT_BRACKET G      &kp H  &kp J  &kp K  &kp L  &kp SEMI  &kp SQT
-   &mt LCTRL TAB  &kp Z  &kp X  &kp C  &kp V  &kp B                 &kp N  &kp M  &kp COMMA  &kp DOT  &kp FSLH  &mt RCTRL RET
+   &fmt LCTRL TAB  &kp Z  &kp X  &kp C  &kp V  &kp B                 &kp N  &kp M  &kp COMMA  &kp DOT  &kp FSLH  &mt RCTRL RET
         &h_alt LALT LGUI        &lt _LOWER BSLH          &kp SPACE    &lt _RAISE GRAVE    &kp RALT
                         >;
                 };
