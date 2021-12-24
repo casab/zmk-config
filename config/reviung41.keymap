@@ -149,15 +149,6 @@
                         flavor = "hold-preferred";
                         bindings = <&kp>, <&kp>;
                 };
-                mo_tap: mo_with_tap {
-                        compatible = "zmk,behavior-hold-tap";
-                        label = "MO_WITH_TAP";
-                        #binding-cells = <2>;
-                        tapping_term_ms = <0>;
-                        retro-tap;
-                        flavor = "hold-preferred";
-                        bindings = <&mo>, <&kp>;
-                };
         };
 
 
@@ -174,7 +165,7 @@
    &mmnet  &kp Q  &kp W  &kp E  &kp R  &kp T                &kp Y  &h_alt RIGHT_BRACKET U  &kp I  &kp O  &kp P  &hom RSHFT BSPC
    &mt_cw LSHFT 0  &kp A  &kp S  &kp D  &kp F  &h_alt LEFT_BRACKET G      &kp H  &kp J  &kp K  &kp L  &kp SEMI  &kp SQT
    &fmt LCTRL TAB  &kp Z  &kp X  &kp C  &kp V  &kp B                 &kp N  &kp M  &kp COMMA  &kp DOT  &kp FSLH  &mt RCTRL RET
-        &h_alt LALT LGUI        &mo_tap _LOWER BSLH          &kp SPACE    &lt _RAISE GRAVE    &kp RALT
+        &h_alt LALT LGUI        &mmlic          &kp SPACE    &lt _RAISE GRAVE    &kp RALT
                         >;
                 };
 
