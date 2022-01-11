@@ -87,7 +87,7 @@
 #define _UTIL 6
 
 
-#define HOMCMD(tap) &hom LGUI tap
+#define HOMCMD(tap) &homwl hold LGUI
 
 
 /*
@@ -115,19 +115,29 @@
                         quick-tap-ms = <200>;
                         bindings = <&kp>, <&kp>;
                 };
-                lthom: layer_tap_hold_only_multiple {
+                homwl: hold_only_multiple_with_layer {
+                        compatible = "zmk,behavior-hold-tap";
+                        label = "HOLD_ONLY_MULTIPLE_WITH_LAYER";
+                        #binding-cells = <2>;
+                        flavor = "tap-unless-interrupted";
+                        tapping-term-ms = <300>;                        // <---[[produces tap if held longer than tapping-term-ms]]
+                        quick-tap-ms = <200>;
+                        bindings = <&mo>, <&kp>;
+                };
+                ltm: behavior_layer_tap_modified {
 			compatible = "zmk,behavior-hold-tap";
-			label = "LAYER_TAP_HOLD_OLD_ONLY_MULTIPLE";
+			label = "LAYER_TAP_MODIFIED";
 			#binding-cells = <2>;
 			flavor = "tap-preferred";
 			tapping-term-ms = <200>;
-			bindings = <&mo>, <&hom>;
+			bindings = <&homwl>, <&kp>;
 		};
+
                 mmlic: mm_lower_instant_comma {
                         compatible = "zmk,behavior-mod-morph";
                         label = "MM_LOWER_INSTANT_COMMA";
                         #binding-cells = <0>;
-                        bindings = <&lthom _LOWER HOMCMD(BSLH)>, <&kp BSLH>;
+                        bindings = <&ltm HOMCMD(_LOWER) BSLH>, <&kp BSLH>;
                         mods = <(RSHFT)>;
                 }; 
                 mmnet: mm_numpad_escape_tab {
