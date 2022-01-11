@@ -115,11 +115,19 @@
                         quick-tap-ms = <200>;
                         bindings = <&kp>, <&kp>;
                 };
+                lthom: layer_tap_hold_only_multiple {
+			compatible = "zmk,behavior-hold-tap";
+			label = "LAYER_TAP_HOLD_OLD_ONLY_MULTIPLE";
+			#binding-cells = <2>;
+			flavor = "tap-preferred";
+			tapping-term-ms = <200>;
+			bindings = <&mo>, <&hom>;
+		};
                 mmlic: mm_lower_instant_comma {
                         compatible = "zmk,behavior-mod-morph";
                         label = "MM_LOWER_INSTANT_COMMA";
                         #binding-cells = <0>;
-                        bindings = <&lt _LOWER HOMCMD(BSLH)>, <&kp BSLH>;
+                        bindings = <&lthom _LOWER HOMCMD(BSLH)>, <&kp BSLH>;
                         mods = <(RSHFT)>;
                 }; 
                 mmnet: mm_numpad_escape_tab {
