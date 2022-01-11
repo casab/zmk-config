@@ -113,11 +113,28 @@
                         quick-tap-ms = <200>;
                         bindings = <&kp>, <&kp>;
                 };
+                hoc: hold_only_cmd {
+                        compatible = "zmk,behavior-hold-tap";
+                        label = "HOLD_ONLY_COMMAND";
+                        #binding-cells = <0>;
+                        flavor = "tap-unless-interrupted";
+                        tapping-term-ms = <300>;                        // <---[[produces tap if held longer than tapping-term-ms]]
+                        quick-tap-ms = <200>;
+                        bindings = <&kp LGUI>, <&kp BSLH>;
+                };
+                lthc: layer_tap_hold_cmd {
+			compatible = "zmk,behavior-hold-tap";
+			label = "LAYER_TAP_HOLD_COMMAND";
+			#binding-cells = <1>;
+			flavor = "tap-preferred";
+			tapping-term-ms = <200>;
+			bindings = <&mo _LOWER>, <&hoc>;
+		};
                 mmlic: mm_lower_instant_comma {
                         compatible = "zmk,behavior-mod-morph";
                         label = "MM_LOWER_INSTANT_COMMA";
                         #binding-cells = <0>;
-                        bindings = <&lt _LOWER BSLH>, <&kp BSLH>;
+                        bindings = <&lthc, <&kp BSLH>;
                         mods = <(RSHFT)>;
                 }; 
                 mmnet: mm_numpad_escape_tab {
