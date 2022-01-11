@@ -87,6 +87,8 @@
 #define _UTIL 6
 
 
+#define HOMCMD(tap) &hom LGUI tap
+
 
 /*
  * Temporarily here because nice nano v2 spi is not defined on ZMk YET
@@ -119,7 +121,7 @@
 			#binding-cells = <0>;
 			flavor = "tap-preferred";
 			tapping-term-ms = <200>;
-			bindings = <&mo _LOWER>, <&hom LGUI BSLH>;
+			bindings = <&mo _LOWER>, <HOMCMD(BSLH)>;
 		};
                 mmlic: mm_lower_instant_comma {
                         compatible = "zmk,behavior-mod-morph";
