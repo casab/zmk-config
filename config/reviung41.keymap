@@ -123,7 +123,7 @@
                         compatible = "zmk,behavior-mod-morph";
                         label = "OPTION_COMMAND";
                         #binding-cells = <0>;
-                        bindings = <&mmlicC>, <&kp GRAVE>;
+                        bindings = <&mmlic>, <&kp GRAVE>;
                         mods = <(MOD_LALT)>;
                 };
                 mmnet: mm_numpad_escape_tab {
