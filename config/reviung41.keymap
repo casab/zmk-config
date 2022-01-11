@@ -125,7 +125,7 @@
                 lthc: layer_tap_hold_cmd {
 			compatible = "zmk,behavior-hold-tap";
 			label = "LAYER_TAP_HOLD_COMMAND";
-			#binding-cells = <1>;
+			#binding-cells = <0>;
 			flavor = "tap-preferred";
 			tapping-term-ms = <200>;
 			bindings = <&mo _LOWER>, <&hoc>;
