@@ -134,7 +134,7 @@
                         compatible = "zmk,behavior-mod-morph";
                         label = "MM_LOWER_INSTANT_COMMA";
                         #binding-cells = <0>;
-                        bindings = <&lthc, <&kp BSLH>;
+                        bindings = <&lthc>, <&kp BSLH>;
                         mods = <(RSHFT)>;
                 }; 
                 mmnet: mm_numpad_escape_tab {
