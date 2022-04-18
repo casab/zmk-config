@@ -16,6 +16,7 @@
  * GitHub Issue: https://github.com/zmkfirmware/zmk/issues/885
  */
 
+#include <dt-bindings/led/led.h>
 &spi1 {
    compatible = "nordic,nrf-spim";
    status = "okay";
