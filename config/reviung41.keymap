@@ -119,7 +119,7 @@
                         label = "MM_LOWER_INSTANT_COMMA";
                         #binding-cells = <0>;
                         bindings = <&lt _LOWER BSLH>, <&kp BSLH>;
-                        mods = <(RSHFT)>;
+                        mods = <(MOD_RSFT)>;
                 }; 
                 optcmd: option_command {
                         compatible = "zmk,behavior-mod-morph";
