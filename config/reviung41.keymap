@@ -128,7 +128,6 @@
                         #binding-cells = <0>;
                         bindings = <&mmlic>, <&kp LGUI>;
                         mods = <(MOD_LALT)>;
-                        keep-mods = <(MOD_LALT)>;
                 };
                 mmnet: mm_numpad_escape_tab {
                         compatible = "zmk,behavior-mod-morph";
