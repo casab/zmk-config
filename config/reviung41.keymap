@@ -76,7 +76,7 @@
                         compatible = "zmk,behavior-mod-morph";
                         label = "MM_LOWER_INSTANT_COMMA";
                         #binding-cells = <0>;
-                        bindings = <&lt _LOWER BSLH>, <&kp BSLH>;
+                        bindings = <&mo _LOWER>, <&kp BSLH>;
                         mods = <(MOD_RSFT)>;
                         keep-mods = <(MOD_RSFT)>;
                 }; 
@@ -94,6 +94,7 @@
                         tapping-term-ms = <300>; // Adjust this to your preference
                         flavor = "tap-preferred";
                         bindings = <&kp &mmlic>; // mmlic when tapped, CMD when held
+                        // use it like &procmd LGUI 0
                 };
                 mmnet: mm_numpad_escape_tab {
                         compatible = "zmk,behavior-mod-morph";
