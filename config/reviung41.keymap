@@ -120,24 +120,23 @@
                         label = "MM_LOWER_INSTANT_COMMA";
                         #binding-cells = <0>;
                         bindings = <&lt _LOWER BSLH>, <&kp BSLH>;
-                        mods = <(RSHIFT)>;
-                        keep-mods = <(RSHIFT)>;
+                        mods = <(MOD_RSFT)>;
+                        keep-mods = <(MOD_RSFT)>;
                 }; 
                 optcmd: option_command {
                         compatible = "zmk,behavior-mod-morph";
                         label = "OPTION_COMMAND";
                         #binding-cells = <0>;
                         bindings = <&mmlic>, <&kp LGUI>;
-                        mods = <(LALT)>;
-                        keep-mods = <(RSHIFT)>;
+                        mods = <(MOD_LALT)>;
                 };
                 mmnet: mm_numpad_escape_tab {
                         compatible = "zmk,behavior-mod-morph";
                         label = "MM_NUMPAD_ESCAPE_TAB";
                         #binding-cells = <0>;
                         bindings = <&lt _NUMPAD ESC>, <&kp TAB>;
-                        mods = <(LALT|LSHIFT|LCTRL|LGUI)>;
-                        keep-mods = <(LALT|LSHIFT|LCTRL|LGUI)>;
+                        mods = <(MOD_LALT|MOD_LSFT|MOD_LCTL|MOD_LGUI)>;
+                        keep-mods = <(MOD_LALT|MOD_LSFT|MOD_LCTL|MOD_LGUI)>;
                 }; 
                 prog_caps: behavior_prog_caps_word {
                         compatible = "zmk,behavior-caps-word";
