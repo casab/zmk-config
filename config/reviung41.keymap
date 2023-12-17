@@ -129,6 +129,7 @@
                         #binding-cells = <0>;
                         bindings = <&mmlic>, <&kp LGUI>;
                         mods = <(LALT)>;
+                        keep-mods = <(RSHIFT)>;
                 };
                 procmd: pro_command {
                         compatible = "zmk,behavior-hold-tap";
@@ -137,6 +138,7 @@
                         tapping-term-ms = <300>; // Adjust this to your preference
                         flavor = "tap-preferred";
                         bindings = <&mmlic>, <&kp LGUI>; // mmlic when tapped, CMD when held
+                        keep-mods = <(RSHIFT)>;
                 };
                 mmnet: mm_numpad_escape_tab {
                         compatible = "zmk,behavior-mod-morph";
