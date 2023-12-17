@@ -134,7 +134,7 @@
                 procmd: pro_command {
                         compatible = "zmk,behavior-hold-tap";
                         label = "PRO_COMMAND";
-                        #binding-cells = <2>;
+                        #binding-cells = <0>;
                         tapping-term-ms = <300>; // Adjust this to your preference
                         flavor = "tap-preferred";
                         bindings = <&mmlic>, <&kp LGUI>; // mmlic when tapped, CMD when held
