@@ -93,7 +93,7 @@
                         #binding-cells = <2>;
                         tapping-term-ms = <300>; // Adjust this to your preference
                         flavor = "tap-preferred";
-                        bindings = <&mmlic>, <&kp LGUI>; // mmlic when tapped, CMD when held
+                        bindings = <&mmlic &kp LGUI>; // mmlic when tapped, CMD when held
                 };
                 mmnet: mm_numpad_escape_tab {
                         compatible = "zmk,behavior-mod-morph";
