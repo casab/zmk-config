@@ -87,7 +87,7 @@
                         tapping-term-ms = <1000>; // Adjust this to your preference
                         quick-tap-ms = <0>;
                         flavor = "tap-unless-interrupted";
-                        bindings = <&kp &mo>; // mmlic when tapped, CMD when held
+                        bindings = <&kp>, <&mo>; // mmlic when tapped, CMD when held
                         // use it like &procmd LGUI 0
                 };
                 mmlic: mm_lower_instant_comma {
