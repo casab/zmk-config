@@ -84,7 +84,7 @@
                         compatible = "zmk,behavior-hold-tap";
                         label = "PRO_COMMAND";
                         #binding-cells = <2>;
-                        tapping-term-ms = <600>; // Adjust this to your preference
+                        tapping-term-ms = <1000>; // Adjust this to your preference
                         quick_tap_ms = <0>;
                         flavor = "tap-preferred";
                         bindings = <&kp &mo>; // mmlic when tapped, CMD when held
