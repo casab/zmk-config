@@ -46,10 +46,11 @@
 #define _QWERTY 0
 #define _GAMING 1
 #define _LOWER 2
-#define _CMDSHIFT 3
-#define _RAISE 4
-#define _NUMPAD 5
-#define _UTIL 6
+#define _CMD 3
+#define _CMDSHIFT 4
+#define _RAISE 5
+#define _NUMPAD 6
+#define _UTIL 7
 
 
 / {
@@ -178,7 +179,7 @@
                         >;
                 };
 */
-                lower_layer {
+                cmd_layer {
 // -------------------------------------------------------------------------------
 // |  "  |  !  |  '  |  ^  |  +  |  %  |   |  &  |  /  |  (  |  )  |  =  |   ?   |
 // |  <  |  >  |  `  |  #  |  $  |     |   |Left |Down | Up  |Right|  *  |   -   |            // &kp LEFT_BRACKET  &kp RIGHT_BRACKET for Ğ and Ü
