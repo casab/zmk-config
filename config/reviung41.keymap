@@ -85,15 +85,15 @@
                         label = "PRO_COMMAND";
                         #binding-cells = <2>;
                         tapping-term-ms = <1000>;
-                        quick-tap-ms = <1000>;
+                        quick-tap-ms = <0>;
                         flavor = "balanced";
-                        bindings = <&kp>, <&mo>;
+                        bindings = <&mo>, <&kp>;
                 };
                 mmlic: mm_lower_instant_comma {
                         compatible = "zmk,behavior-mod-morph";
                         label = "MM_LOWER_INSTANT_COMMA";
                         #binding-cells = <0>;
-                        bindings = <&procmd LGUI _LOWER>, <&kp BSLH>;
+                        bindings = <&procmd _LOWER LGUI>, <&kp BSLH>;
                         mods = <(MOD_RSFT)>;
                         keep-mods = <(MOD_RSFT)>;
                 }; 
