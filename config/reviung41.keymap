@@ -88,6 +88,7 @@
                         quick-tap-ms = <0>;
                         flavor = "balanced";
                         bindings = <&mo>, <&kp>;
+                        hold-while-undecided;
                 };
                 mmlic: mm_lower_instant_comma {
                         compatible = "zmk,behavior-mod-morph";
