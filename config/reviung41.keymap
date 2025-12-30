@@ -118,6 +118,16 @@
                         flavor = "hold-preferred";
                         bindings = <&kp>, <&kp>;
                 };
+
+                tog_gaming_rgb: tog_gaming_rgb {
+                compatible = "zmk,behavior-macro";
+                #binding-cells = <0>;
+                wait-ms = <0>;
+                tap-ms = <0>;
+                bindings =
+                        <&macro_tap &tog _GAMING>
+                        <&macro_tap &rgb_ug RGB_TOG>;
+                };
         };
 
 
@@ -150,7 +160,7 @@
    &lt _NUMPAD ESC  &kp Q  &kp W  &kp E  &kp R  &kp T                &kp Y  &kp U  &kp I  &kp O  &kp P  &hom RSHFT BSPC
    &kp LSHFT &kp A  &kp S  &kp D  &kp F  &kp G      &kp H  &kp J  &kp K  &kp L  &kp SEMI  &h_alt TAB SQT
    &kp LCTRL &kp Z  &kp X  &kp C  &kp V  &kp B                 &kp N  &kp M  &kp COMMA  &kp DOT  &kp FSLH  &kp RET
-        &kp LALT       &lt _LOWER BSLH          &kp SPACE    &lt _RAISE GRAVE       &tog _GAMING
+        &kp LALT       &lt _LOWER BSLH          &kp SPACE    &lt _RAISE GRAVE       &tog_gaming_rgb
                         >;
                 };
 /*
@@ -236,7 +246,7 @@
    &rgb_ug RGB_BRI &rgb_ug RGB_SAI &rgb_ug RGB_HUI &rgb_ug RGB_EFF &none &rgb_ug RGB_TOG    &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4 &bt BT_CLR
    &rgb_ug RGB_BRD &rgb_ug RGB_SAD &rgb_ug RGB_HUD &rgb_ug RGB_EFR &none &none              &none        &none        &none        &none        &none        &sys_reset
    &kp C_BRI_DEC  &kp C_BRI_INC  &kp C_PREV &kp C_NEXT  &kp C_VOL_DN &kp C_VOL_UP           &kp C_PLAY_PAUSE  &none        &none        &none    &ext_power EP_TOG        &bootloader
-                                                      &trans      &trans       &tog _GAMING        &trans      &trans
+                                                      &trans      &trans       &tog_gaming_rgb        &trans      &trans
                         >;
                 };
         };
