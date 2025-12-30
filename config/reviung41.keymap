@@ -125,7 +125,7 @@
                 wait-ms = <0>;
                 tap-ms = <0>;
                 bindings =
-                        <&macro_tap &tog _GAMING>
+                        <&macro_tap &tog _GAMING>,
                         <&macro_tap &rgb_ug RGB_TOG>;
                 };
         };
