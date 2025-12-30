@@ -56,7 +56,6 @@
         behaviors {
                 h_alt: hold_alternative {
                         compatible = "zmk,behavior-hold-tap";
-                        label = "HOLD_ALTERNATIVE";
                         #binding-cells = <2>;
                         tapping-term-ms = <130>;
                         quick-tap-ms = <0>;
@@ -65,7 +64,6 @@
                 };
                 hom: hold_only_multiple {
                         compatible = "zmk,behavior-hold-tap";
-                        label = "HOLD_ONLY_MULTIPLE";
                         #binding-cells = <2>;
                         flavor = "tap-unless-interrupted";
                         tapping-term-ms = <300>;                        // <---[[produces tap if held longer than tapping-term-ms]]
@@ -74,14 +72,12 @@
                 };
                 optcmd: option_command {
                         compatible = "zmk,behavior-mod-morph";
-                        label = "OPTION_COMMAND";
                         #binding-cells = <0>;
                         bindings = <&mmlic>, <&kp LGUI>;
                         mods = <(MOD_LALT)>;
                 };
                 procmd: pro_command {
                         compatible = "zmk,behavior-hold-tap";
-                        label = "PRO_COMMAND";
                         #binding-cells = <2>;
                         tapping-term-ms = <1000>;
                         quick-tap-ms = <150>;
@@ -91,7 +87,6 @@
                 };
                 mmlic: mm_lower_instant_comma {
                         compatible = "zmk,behavior-mod-morph";
-                        label = "MM_LOWER_INSTANT_COMMA";
                         #binding-cells = <0>;
                         bindings = <&lt _LOWER BSLH>, <&kp BSLH>;
                         mods = <(MOD_RSFT)>;
@@ -99,7 +94,6 @@
                 }; 
                 mmnet: mm_numpad_escape_tab {
                         compatible = "zmk,behavior-mod-morph";
-                        label = "MM_NUMPAD_ESCAPE_TAB";
                         #binding-cells = <0>;
                         bindings = <&lt _NUMPAD ESC>, <&kp TAB>;
                         mods = <(MOD_LALT|MOD_LSFT|MOD_LCTL|MOD_LGUI)>;
@@ -107,13 +101,11 @@
                 }; 
                 prog_caps: behavior_prog_caps_word {
                         compatible = "zmk,behavior-caps-word";
-                        label = "PROG_CAPS";
                         #binding-cells = <0>;
                         continue-list = <PLUS>;
                 };
                 mt_cw: mod_tap_caps_word {
                         compatible = "zmk,behavior-hold-tap";
-                        label = "MT_CW";
                         #binding-cells = <2>;
                         tapping-term-ms = <100>;
                         flavor = "hold-preferred";
@@ -121,7 +113,6 @@
                 };
                 fmt: faster_mod_tap {
                         compatible = "zmk,behavior-hold-tap";
-                        label = "FASTER_MOD_tap";
                         #binding-cells = <2>;
                         tapping-term-ms = <100>;
                         flavor = "hold-preferred";
