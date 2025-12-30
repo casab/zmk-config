@@ -151,13 +151,13 @@
 
                 gaming_layer {
 // -------------------------------------------------------------------------------------
-// |Npd/ESC/T|  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U/Ü |  I  |  O  |  P  | RSft/BKSP|
-// |  Sft    |  A  |  S  |  D  |  F  | G/Ğ |   |  H  |  J   |  K  |  L  |  Ş  |   İ/TAB  |
+// |Npd/ESC/T|  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U   |  I  |  O  |  P  | RSft/BKSP|
+// |  Sft    |  A  |  S  |  D  |  F  |  G  |   |  H  |  J   |  K  |  L  |  Ş  |   İ/TAB  |
 // |  LCtl   |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  Ö  |  Ç  |  .  | RCtlEnt  |
 //                     |   ALT   | LWR/, |  SPC  |  RSE/"  | Tog Gaming  |
                         bindings = <
-   &lt _NUMPAD ESC  &kp Q  &kp W  &kp E  &kp R  &kp T                &kp Y  &h_alt RIGHT_BRACKET U  &kp I  &kp O  &kp P  &hom RSHFT BSPC
-   &kp LSHFT &kp A  &kp S  &kp D  &kp F  &h_alt LEFT_BRACKET G      &kp H  &kp J  &kp K  &kp L  &kp SEMI  &h_alt TAB SQT
+   &lt _NUMPAD ESC  &kp Q  &kp W  &kp E  &kp R  &kp T                &kp Y  &kp U  &kp I  &kp O  &kp P  &hom RSHFT BSPC
+   &kp LSHFT &kp A  &kp S  &kp D  &kp F  &kp G      &kp H  &kp J  &kp K  &kp L  &kp SEMI  &h_alt TAB SQT
    &kp LCTRL &kp Z  &kp X  &kp C  &kp V  &kp B                 &kp N  &kp M  &kp COMMA  &kp DOT  &kp FSLH  &kp RET
         &kp LALT       &lt _LOWER BSLH          &kp SPACE    &lt _RAISE GRAVE       &tog _GAMING
                         >;
