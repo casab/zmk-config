@@ -16,10 +16,9 @@ manifest:
       remote: zzeneg
       revision: main
     # AutoSwitch KVM: lets the AutoSwitch app switch this keyboard's Bluetooth profile when the
-    # KVM switches computers (module in firmware/zmk-autoswitch).
+    # KVM switches computers (https://github.com/casab/zmk-autoswitch).
     - name: zmk-autoswitch
       remote: casab
-      repo-path: AutoSwitchKVM
       revision: main
   self:
     path: config
