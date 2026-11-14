@@ -13,6 +13,6 @@ manifest:
     # KVM switches computers (https://github.com/casab/zmk-autoswitch).
     - name: zmk-autoswitch
       remote: casab
-      revision: hidpp
+      revision: main
   self:
     path: config
