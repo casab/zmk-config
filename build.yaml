@@ -14,5 +14,4 @@
 ---
 include:
   - board: nice_nano//zmk
-    # raw_hid_adapter adds the raw HID interface the AutoSwitch module talks over.
-    shield: reviung41 raw_hid_adapter
+    shield: reviung41

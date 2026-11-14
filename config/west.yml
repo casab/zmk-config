@@ -2,8 +2,6 @@ manifest:
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
-    - name: zzeneg
-      url-base: https://github.com/zzeneg
     - name: casab
       url-base: https://github.com/casab
   projects:
@@ -11,14 +9,10 @@ manifest:
       remote: zmkfirmware
       revision: main
       import: app/west.yml
-    # Raw HID transport (USB + Bluetooth) the AutoSwitch module talks over.
-    - name: zmk-raw-hid
-      remote: zzeneg
-      revision: main
     # AutoSwitch KVM: lets the AutoSwitch app switch this keyboard's Bluetooth profile when the
     # KVM switches computers (https://github.com/casab/zmk-autoswitch).
     - name: zmk-autoswitch
       remote: casab
-      revision: main
+      revision: hidpp
   self:
     path: config
