@@ -35,6 +35,10 @@ keymap for a Turkish-Q host layout and the `zmk-autoswitch` module.
 - The gaming LED comes from `zmk-rgb-layer-indicator` (`rgb_layer_indicator`
   node). Don't set RGB from keymap macros: the user's own RGB settings must
   survive gaming.
+- Only toggled (sticky) layers get an indicator color, like `_GAMING`. Held
+  layers (Lower, Raise, Numpad, Util) don't: holding the key already shows
+  they're on, and a color would just flash on every hold. Util must never get
+  one anyway, because the RGB controls live there.
 - Keep the layer `#define`s in `config/reviung41.keymap` in the same order as
   the layer nodes.
 - Every layer has a diagram comment above its `bindings`. Update the diagram in
