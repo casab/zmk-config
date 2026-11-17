@@ -10,25 +10,19 @@
 #include <dt-bindings/zmk/rgb.h>
 #include <dt-bindings/zmk/ext_power.h>
 
-// For QMK:
-// KC_NONUS_BSLASH (\|) is equivalent to ["é] key in Turkish keyboards.
-// KC_GRV (~ `) is equivalent to [<>|] key in Turkish keyboards.
-// KC_SCLN is Turkish s [şŞ] key
-// KC_QUOT is Turkish i [iİ] key
-// KC_COMM is Turkish o [öÖ] key
-// KC_DOT is Turkish c [çÇ] key
+// Turkish-Q host layout
+// ZMK sends key positions; the computer turns them into characters with its own
+// keyboard layout. With the host set to Turkish-Q, these US-named keycodes type:
+//   SEMI -> ş Ş     SQT  -> i İ     COMMA -> ö Ö     DOT -> ç Ç
+//   FSLH -> . :     BSLH -> , ;     LEFT_BRACKET -> ğ Ğ     RIGHT_BRACKET -> ü Ü
+//   GRAVE -> " é    NON_US_BSLH -> < > |
+// The same on Windows and macOS (< > | confirmed on both).
+// Shifted US keycodes follow the same rule: CARET (Shift+6) types &, AMPS (Shift+7) types /.
+//
+// Diagram notation: "tap/hold", e.g. "Esc/Npd" taps Esc and holds the numpad layer.
+// ⌘ is LG(...) (Cmd on macOS, Win on Windows), ⇧ is Shift.
 
-// For ZMK:
-// NON_US_BACKSLASH (\|) is equivalent to ["é] key in Turkish keyboards.
-// GRAVE (~ `) is equivalent to [<>|] key in Turkish keyboards.
-// SEMI (;) is Turkish s [şŞ] key
-// SQT (') is Turkish i [iİ] key
-// COMMA (,) is Turkish o [öÖ] key
-// DOT (.) is Turkish c [çÇ] key
-// FSLH (/) is Turkish dot [.:] key
-// BSLH (\) is Turkish comma (,;) key
-
-// Custom shortcuts specific to Turkish layout
+// Right-Alt (AltGr) symbols on Turkish-Q
 #define _CURLY_OPEN RA(N7)
 #define _CURLY_CLOSE RA(N0)
 #define _AT_SIGN RA(Q)
@@ -40,7 +34,6 @@
 #define _BACKTICK RA(BACKSLASH)
 #define _TILDE RA(RIGHT_BRACKET)
 #define _NUMBER_SIGN RA(N3) //hashtag sign
-#define _LOCKSCREEN LC(LS(C_PWR)) // Screen Lock shortcut for OSX
 
 // Layers
 #define _QWERTY 0
@@ -66,24 +59,9 @@
                         compatible = "zmk,behavior-hold-tap";
                         #binding-cells = <2>;
                         flavor = "tap-unless-interrupted";
-                        tapping-term-ms = <300>;                        // <---[[produces tap if held longer than tapping-term-ms]]
+                        tapping-term-ms = <300>;                        // hold only if another key is pressed within this time; a longer press alone is still a tap
                         quick-tap-ms = <200>;
                         bindings = <&kp>, <&kp>;
-                };
-                optcmd: option_command {
-                        compatible = "zmk,behavior-mod-morph";
-                        #binding-cells = <0>;
-                        bindings = <&mmlic>, <&kp LGUI>;
-                        mods = <(MOD_LALT)>;
-                };
-                procmd: pro_command {
-                        compatible = "zmk,behavior-hold-tap";
-                        #binding-cells = <2>;
-                        tapping-term-ms = <1000>;
-                        quick-tap-ms = <150>;
-                        flavor = "balanced";
-                        bindings = <&mo>, <&kp>;
-                        hold-while-undecided;
                 };
                 mmlic: mm_lower_instant_comma {
                         compatible = "zmk,behavior-mod-morph";
@@ -136,11 +114,12 @@
                 compatible = "zmk,keymap";
 
                 default_layer {
-// -------------------------------------------------------------------------------------
-// |Npd/ESC/T|  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U/Ü |  I  |  O  |  P  | RSft/BKSP|
-// |Sft/Cps  |  A  |  S  |  D  |  F  | G/Ğ |   |  H  |  J   |  K  |  L  |  Ş  |    İ     |
-// |LCtlTab  |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  Ö  |  Ç  |  .  | RCtlEnt  |
-//                      |LGUI/ALT | LWR/, |  SPC  | RSE/"  | ALT  |
+// ---------------------------------------------------------------------------------------
+// | Esc/Npd |  Q  |  W  |  E  |  R  |  T  |   |  Y  | U/Ü |  I  |  O  |  P  | Bspc/RSft |
+// | CpsW/Sft|  A  |  S  |  D  |  F  | G/Ğ |   |  H  |  J  |  K  |  L  |  Ş  |     İ     |
+// | Tab/Ctl |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M  |  Ö  |  Ç  |  .  |   Enter   |
+//                      | ⌘/Alt | ,/Lwr | Space | "/Rse | RAlt |
+// Esc/Npd sends Tab while a left modifier is held. ,/Lwr sends ; while Right Shift is held.
                         bindings = <
    &mmnet  &kp Q  &kp W  &kp E  &kp R  &kp T                &kp Y  &h_alt RIGHT_BRACKET U  &kp I  &kp O  &kp P  &hom RSHFT BSPC
    &mt_cw LSHFT 0  &kp A  &kp S  &kp D  &kp F  &h_alt LEFT_BRACKET G      &kp H  &kp J  &kp K  &kp L  &kp SEMI  &kp SQT
@@ -151,11 +130,11 @@
 
 
                 gaming_layer {
-// -------------------------------------------------------------------------------------
-// |Npd/ESC/T|  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U   |  I  |  O  |  P  | RSft/BKSP|
-// |  Sft    |  A  |  S  |  D  |  F  |  G  |   |  H  |  J   |  K  |  L  |  Ş  |   İ/TAB  |
-// |  LCtl   |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  Ö  |  Ç  |  .  | RCtlEnt  |
-//                     |   ALT   | LWR/, |  SPC  |  RSE/"  | Tog Gaming  |
+// ---------------------------------------------------------------------------------------
+// | Esc/Npd |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U  |  I  |  O  |  P  | Bspc/RSft |
+// |  LSft   |  A  |  S  |  D  |  F  |  G  |   |  H  |  J  |  K  |  L  |  Ş  |   İ/Tab   |
+// |  LCtl   |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M  |  Ö  |  Ç  |  .  |   Enter   |
+//                      |  Alt  | ,/Lwr | Space | "/Rse | Gaming+RGB toggle |
                         bindings = <
    &lt _NUMPAD ESC  &kp Q  &kp W  &kp E  &kp R  &kp T                &kp Y  &kp U  &kp I  &kp O  &kp P  &hom RSHFT BSPC
    &kp LSHFT &kp A  &kp S  &kp D  &kp F  &kp G      &kp H  &kp J  &kp K  &kp L  &kp SEMI  &h_alt TAB SQT
@@ -163,29 +142,14 @@
         &kp LALT       &lt _LOWER BSLH          &kp SPACE    &lt _RAISE GRAVE       &tog_gaming_rgb
                         >;
                 };
-/*
 
                 lower_layer {
-// -------------------------------------------------------------------------------
-// |  "  |  !  |  '  |  ^  |  +  |  %  |   |  &  |  /  |  (  |  )  |  =  |   ?   |
-// |  <  |  >  |  `  |  #  |  $  |     |   |Left |Down | Up  |Right|  *  |   -   |            // &kp LEFT_BRACKET  &kp RIGHT_BRACKET for Ğ and Ü
-// | "|" |  @  |     |     |     |     |   |     | "{" | "[" | "]" | "}" |   _   |
-//                       |      |    |  DEL | UTIL | F14 |
-                        bindings = <
-   &kp GRAVE     &kp EXCL  &kp AT  &kp HASH  &kp DLLR  &kp PRCNT                                       &kp CARET  &kp AMPS  &kp ASTERISK  &kp LPAR &kp RPAR  &kp UNDERSCORE
-   &kp NON_US_BSLH  &kp LS(NON_US_BSLH) &kp _BACKTICK  &kp _NUMBER_SIGN  &kp _DOLLAR_SIGN  &none        &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT &kp MINUS  &kp EQUAL
-   &kp _VERTICAL_PIPE  &kp _AT_SIGN  &none  &none  &none  &none                                                       &none  &kp _CURLY_OPEN  &kp _SQUARE_OPEN  &kp _SQUARE_CLOSE  &kp _CURLY_CLOSE  &kp PLUS
-                                                      &kp LGUI  &trans    &kp DEL    &mo _UTIL  &trans
-                        >;
-                };
-*/
-
-                lower_layer {
-// -------------------------------------------------------------------------------
-// |  "  |  !  |  '  |  ^  |  +  |  %  |   |  &  |  /  |  (  |  )  |  =  |   ?   |
-// |  <  |  >  |  `  |  #  |  $  |     |   |Left |Down | Up  |Right|  *  |   -   |            // &kp LEFT_BRACKET  &kp RIGHT_BRACKET for Ğ and Ü
-// | "|" |  @  |     |     |     |     |   |     | "{" | "[" | "]" | "}" |   _   |
-//                       |      |    |  DEL | UTIL | F14 |
+// ---------------------------------------------------------------------------------------
+// | ⌘Tab  | ⌘Q  | ⌘W  | ⌘E  | ⌘R  | ⌘T  |   |  &  |  /  |  (  |  )  |  =  |  ?  |
+// | ⇧⌘Lyr | ⌘A  | ⌘S  | ⌘D  | ⌘F  | ⌘G  |   |Left |Down | Up  |Right|  *  |  -  |
+// | ⌘Ctl  | ⌘Z  | ⌘X  | ⌘C  | ⌘V  | ⌘B  |   | ⌘N  |  {  |  [  |  ]  |  }  |  _  |
+//                      | ⌘Alt  | (held) | ⌘Space | ⌘"/Util |     |
+// ⇧⌘Lyr holds the Cmd+Shift layer.
                         bindings = <
    &kp LG(TAB)     &kp LG(Q)  &kp LG(W)  &kp LG(E)  &kp LG(R)  &kp LG(T)                    &kp CARET  &kp AMPS  &kp ASTERISK  &kp LPAR &kp RPAR  &kp UNDERSCORE
    &mo _CMDSHIFT &kp LG(A) &kp LG(S) &kp LG(D) &kp LG(F) &kp LG(G)                     &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT &kp MINUS  &kp EQUAL
@@ -195,11 +159,12 @@
                 };
 
                 cmdshift_layer {
-// -------------------------------------------------------------------------------------
-// |Npd/ESC/T|  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U/Ü |  I  |  O  |  P  | RSft/BKSP|
-// |Sft/Cps  |  A  |  S  |  D  |  F  | G/Ğ |   |  H  |  J   |  K  |  L  |  Ş  |    İ     |
-// |LCtlTab  |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  Ö  |  Ç  |  .  | RCtlEnt  |
-//                      |LGUI/ALT | LWR/, |  SPC  | RSE/"  | ALT  |
+// ---------------------------------------------------------------------------------------
+// Every key except the blanks and the right thumbs sends ⇧⌘ + that key.
+// | ⇧⌘Tab  |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U  |  I  |  O  |  P  |       |
+// | (held) |  A  |  S  |  D  |  F  |  G  |   |  H  |  J  |  K  |  L  |  Ş  |   İ   |
+// | ⇧⌘Ctl  |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M  |  Ö  |  Ç  |  .  |       |
+//                      | ⇧⌘Alt |       | ⇧⌘Space | "/Rse | RAlt |
                         bindings = <
    &kp LG(LS(TAB))  &kp LG(LS(Q))  &kp LG(LS(W))  &kp LG(LS(E))  &kp LG(LS(R))  &kp LG(LS(T))                &kp LG(LS(Y))  &kp LG(LS(U))  &kp LG(LS(I))  &kp LG(LS(O))  &kp LG(LS(P))  &none
    &trans        &kp LG(LS(A))  &kp LG(LS(S))  &kp LG(LS(D))  &kp LG(LS(F))  &kp LG(LS(G))                  &kp LG(LS(H))  &kp LG(LS(J))  &kp LG(LS(K))  &kp LG(LS(L))  &kp LG(LS(SEMI))  &kp LG(LS(SQT))
@@ -209,11 +174,11 @@
                 };
 
                 raise_layer {
-// -------------------------------------------------------------------------------
-// |  "  |  !  |  '  |  ^  |  +  |  %  |   |  &  |  /  |  (  |  )  |  =  |   ?   |
-// |  <  |  >  |  `  |  #  |  $  |     |   |Home |PgDwn|PgUp |End  | "\" |  "~"  |
-// | "|" |  @  |     |     |     |     |   |     | "{" | "[" | "]" | "}" |   _   |
-//                       |     | UTIL | DEL |    |     |
+// ---------------------------------------------------------------------------------------
+// |  "  |  !  |  '  |  ^  |  +  |  %  |   |  &  |  /  |  (  |  )  |  =  |  ?  |
+// |  <  |  >  |  `  |  #  |  $  |     |   |Home |PgDn |PgUp | End |  \  |  ~  |
+// |  |  |  @  |     |     |     |     |   |     |  {  |  [  |  ]  |  }  |  _  |
+//                      |       | Util  |  Del  | (held) |      |
                         bindings = <
    &kp GRAVE     &kp EXCL  &kp AT  &kp HASH  &kp DLLR  &kp PRCNT                                       &kp CARET  &kp AMPS  &kp ASTERISK  &kp LPAR &kp RPAR  &kp UNDERSCORE
    &kp NON_US_BSLH  &kp LS(NON_US_BSLH) &kp _BACKTICK  &kp _NUMBER_SIGN  &kp _DOLLAR_SIGN  &none        &kp HOME  &kp PAGE_DOWN  &kp PAGE_UP  &kp END &kp _BACKSLASH  &kp _TILDE
@@ -224,11 +189,12 @@
 
                 // KP_DOT is comma on the Turkish layout ¯\_(ツ)_/¯
                 numpad_layer {
-// -----------------------------------------------------------------------------------------
-// |     |     |     |     |     |     |   |  =  |Num7 |Num8 |Num9 |  -  |Bcksp |
-// | F1  | F2  | F3  | F4  | F5  | F6  |   |  .  |Num4 |Num5 |Num6 |  +  |  *   |
-// | F7  | F8  | F9  | F10 | F11 | F12 |   |  ,  |Num1 |Num2 |Num3 |  .  |  /   |
-//                   |      |     | SPC |  Num0  |  Num0   |
+// ---------------------------------------------------------------------------------------
+// |     |     |     |     |     |     |   |  =  |  7  |  8  |  9  |  -  | Bspc |
+// | F1  | F2  | F3  | F4  | F5  | F6  |   |  .  |  4  |  5  |  6  |  +  |  *   |
+// | F7  | F8  | F9  | F10 | F11 | F12 |   |  ,  |  1  |  2  |  3  |  .  |  /   |
+//                      |       |       | Space |   0   |  0   |
+// The digits are number-row keys; = - + , / are keypad keys.
                         bindings = <
    &none  &none  &none  &none  &none  &none                     &kp KP_EQUAL  &kp N7  &kp N8  &kp N9  &kp KP_MINUS  &kp BSPC
    &kp F1  &kp F2  &kp F3  &kp F4  &kp F5  &kp F6                     &kp SLASH  &kp N4  &kp N5  &kp N6  &kp KP_PLUS  &kp MINUS
@@ -238,11 +204,12 @@
                 };
 
                 util_layer {
-// -----------------------------------------------------------------------------------------
-// | RGB BRI+ | RGB SAT+ | RGB HUE+ | RGB ANI+ |    | RGB TOG |   |  BT1  | BT2 | BT3 | BT4 | BT5   |  BT CLR  |
-// | RGB BRI- | RGB SAT- | RGB HUE- | RGB ANI+ |    |         |   |       |     |     |     |       |  RESET   |
-// |   Brgt▼  |  Brgt▲   |   Prev   |   Next   |Vol-|    Vol+ |   |PlayPse|     |     |     |TOG PWR|BOOTLOADER|
-//                               |     |     |Tog Gaming|     |     |
+// ---------------------------------------------------------------------------------------------------------------
+// | RGB BRI+ | RGB SAT+ | RGB HUE+ | RGB EFF+ |    | RGB TOG |   |  BT1  | BT2 | BT3 | BT4 | BT5   |  BT CLR  |
+// | RGB BRI- | RGB SAT- | RGB HUE- | RGB EFF- |    |         |   |       |     |     |     |       |  RESET   |
+// |   Brgt▼  |  Brgt▲   |   Prev   |   Next   |Vol-|    Vol+ |   |PlayPse|     |     |     |EXT PWR|BOOTLOADER|
+//                               |     |     |Gaming+RGB toggle|     |     |
+// BT CLR clears only the selected profile. EXT PWR toggles the external power rail that feeds the RGB LEDs.
                         bindings = <
    &rgb_ug RGB_BRI &rgb_ug RGB_SAI &rgb_ug RGB_HUI &rgb_ug RGB_EFF &none &rgb_ug RGB_TOG    &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4 &bt BT_CLR
    &rgb_ug RGB_BRD &rgb_ug RGB_SAD &rgb_ug RGB_HUD &rgb_ug RGB_EFR &none &none              &none        &none        &none        &none        &none        &sys_reset
