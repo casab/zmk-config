@@ -31,8 +31,12 @@ keymap for a Turkish-Q host layout and the `zmk-autoswitch` module.
 ## Files
 
 - `config/reviung41.keymap` - aliases, behaviors, layers, bindings.
-- `config/reviung41.conf` - RGB underglow, BT TX power +8 dBm,
+- `config/reviung41.conf` - RGB underglow (auto-off when idle), deep sleep,
+  BT TX power +8 dBm, experimental BLE features (passkey pairing),
   `CONFIG_ZMK_AUTOSWITCH=y`.
+- Changes that alter HID descriptors or pairing (NKRO, HID indicators, USB boot,
+  passkey/security options, AutoSwitch HID) force the user to re-pair every
+  computer. Say so before making them.
 - `config/west.yml` - ZMK `main` plus `zmk-autoswitch` `main` (casab remote).
 - `build.yaml` - build matrix: `nice_nano//zmk` + `reviung41`.
 - `.github/workflows/build.yml` - ZMK's shared `build-user-config.yml@main`.

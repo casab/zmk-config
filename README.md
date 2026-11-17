@@ -118,12 +118,33 @@ switches. It's turned on by `CONFIG_ZMK_AUTOSWITCH=y` in `reviung41.conf`.
 - In the AutoSwitch app, open **Devices** and add the keyboard. It should say
   "Switches channel on request".
 
-## Hardware settings
+## Power and connection settings
 
-- **RGB underglow** is on. Toggle it on the Util layer, or cut power to the LEDs
-  with **EXT PWR** to save battery.
+All in `config/reviung41.conf`.
+
+- **RGB underglow** is on and turns itself off after 30 seconds without a
+  keypress. Any key turns it back on. Toggle it on the Util layer, or cut power
+  to the LEDs with **EXT PWR**.
+- **Deep sleep** after 15 minutes without a keypress. Any key wakes the keyboard,
+  and that key isn't typed. It never sleeps while plugged into USB power. While
+  asleep it isn't connected to any computer, so AutoSwitch can't move it to
+  another profile until it wakes.
 - **Bluetooth transmit power** is raised to +8 dBm for range, which uses more
   battery.
+- **Experimental Bluetooth features** (`CONFIG_ZMK_BLE_EXPERIMENTAL_FEATURES`):
+  - The 2M radio mode is off, which steadies connections on some Windows and Mac
+    Bluetooth chips.
+  - Pairing uses a passkey. The computer shows 6 digits; type them on the
+    keyboard (number row or the numpad layer) and press Enter. Esc cancels.
+  - A computer that forgot the keyboard can pair again to its own profile
+    without pressing BT CLR first.
+
+### USB and Bluetooth
+
+ZMK prefers USB, but only once a computer has set the keyboard up as a USB
+keyboard. On a charger or a power-only cable it keeps typing over Bluetooth.
+Bluetooth stays connected in the background either way. There's no setting to
+turn it off while on USB.
 
 ## To do
 
