@@ -42,8 +42,8 @@ inner, outer.
 | # | Layer | How to reach it | What's on it |
 | --- | --- | --- | --- |
 | 0 | `_QWERTY` | Default | Letters including Ğ (hold G) and Ü (hold U), Caps Word / Shift, Tab / Ctrl, Backspace / Right Shift. |
-| 1 | `_GAMING` | Util layer, space key. Turn off with the right outer thumb. | Plain Shift, Ctrl and Alt with no tap actions, so they react instantly. Toggling it also toggles RGB, which acts as an indicator. |
-| 2 | `_LOWER` | Hold the left inner thumb | `LG(...)` shortcuts on the left (Cmd on macOS, Win on Windows), arrows and symbols on the right. |
+| 1 | `_GAMING` | Util layer, space key. Turn off with the right outer thumb. | Plain Shift, Ctrl and Alt with no tap actions, so they react instantly. The LEDs are solid purple while it's on and off when you leave it. |
+| 2 | `_LOWER` | Hold the left inner thumb. This also holds Cmd (Win on Windows). | Cmd + left-hand keys, plus arrows and symbols on the right, which type without Cmd. |
 | 3 | `_CMDSHIFT` | On Lower, hold the left key of the middle row | Cmd+Shift+key for every letter. |
 | 4 | `_RAISE` | Hold the right inner thumb | Symbols, Home/End/PgUp/PgDn, Delete. |
 | 5 | `_NUMPAD` | Hold the top-left key | Digits, F1–F12, `= - + * / . ,`. |
@@ -55,12 +55,20 @@ inner, outer.
 | Esc/Npd |  Q  |  W  |  E  |  R  |  T  |   |  Y  | U/Ü |  I  |  O  |  P  | Bspc/RSft |
 | CpsW/Sft|  A  |  S  |  D  |  F  | G/Ğ |   |  H  |  J  |  K  |  L  |  Ş  |     İ     |
 | Tab/Ctl |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M  |  Ö  |  Ç  |  .  |   Enter   |
-                     | ⌘/Alt | ,/Lwr | Space | "/Rse | RAlt |
+                     | ⌘/Alt | ,/Lwr⌘ | Space | "/Rse | RAlt |
 ```
 
 - `Esc/Npd` types Tab instead of Esc while a left modifier is held, so
   Cmd+Tab and Shift+Tab work from that key.
-- `,/Lwr` types `;` while Right Shift is held.
+- `,/Lwr⌘` types `,` when tapped, and `;` while Right Shift is held. Held, it
+  opens Lower **and holds Cmd**, like the Cmd key on a Mac keyboard, so Cmd+click
+  and Cmd + left-hand keys work. The symbols and arrows on Lower's right half
+  drop that Cmd and type normally. Cmd starts after the usual 200 ms hold.
+  - On Windows this Cmd is the Win key. The keyboard taps Right Ctrl right after
+    pressing Win and again before releasing it, so Windows doesn't open the Start
+    menu. If Start still pops up while you type Lower symbols, that mitigation
+    isn't enough and the design needs changing.
+  - From the gaming layer, Lower doesn't hold Cmd/Win.
 - `CpsW` is Caps Word: it capitalizes letters until you type a non-letter.
   `_` keeps it going, so `MY_CONSTANT` works. (On Turkish-Q, `_` is the `PLUS`
   keycode, which is why the keymap's continue list names `PLUS`.)
@@ -103,7 +111,9 @@ keycodes type the same characters on both (`< > |` confirmed on each).
 | `prog_caps` | Caps Word | | Caps Word that continues through `_` (`PLUS` keycode) |
 | `mmnet` | Mod-morph | | Esc/Npd that becomes Tab with a left modifier |
 | `mmlic` | Mod-morph | | `,`/Lower that becomes `;` with Right Shift |
-| `tog_gaming_rgb` | Macro | | Toggles the gaming layer and RGB together |
+| `lwr_cmd` + `lower_cmd` | Hold-tap, tap-preferred + macro | 200 ms | The Lower thumb: tap `,`, hold Lower + Cmd (with Right Ctrl taps against the Windows Start menu) |
+| `nc_*` | Mod-morph | | Lower's right-half symbols and arrows with the Lower thumb's Cmd removed |
+| `gaming_on` / `gaming_off` | Macro | | Turn the gaming layer on with solid purple LEDs / off with LEDs off |
 
 ## AutoSwitch
 
@@ -122,13 +132,16 @@ switches. It's turned on by `CONFIG_ZMK_AUTOSWITCH=y` in `reviung41.conf`.
 
 All in `config/reviung41.conf`.
 
-- **RGB underglow** is on and turns itself off after 30 seconds without a
-  keypress. Any key turns it back on. Toggle it on the Util layer, or cut power
-  to the LEDs with **EXT PWR**.
+- **RGB underglow** is the gaming indicator: solid purple on the gaming layer,
+  off otherwise. It turns itself off after 30 seconds without a keypress, and
+  any key brings it back. The RGB keys on the Util layer still work, and
+  **EXT PWR** cuts power to the LEDs.
 - **Deep sleep** after 15 minutes without a keypress. Any key wakes the keyboard,
   and that key isn't typed. It never sleeps while plugged into USB power. While
   asleep it isn't connected to any computer, so AutoSwitch can't move it to
-  another profile until it wakes.
+  another profile until it wakes. Waking restarts the keyboard on the base
+  layer, but the LED state is saved. If it fell asleep while gaming, the LEDs
+  stay purple after waking. Turn gaming on and off once to fix that.
 - **Bluetooth transmit power** is raised to +8 dBm for range, which uses more
   battery.
 - **Experimental Bluetooth features** (`CONFIG_ZMK_BLE_EXPERIMENTAL_FEATURES`):

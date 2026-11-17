@@ -19,6 +19,11 @@ keymap for a Turkish-Q host layout and the `zmk-autoswitch` module.
   `GRAVE` = `" é` and `NON_US_BSLH` = `< > |` on both (confirmed by the user).
 - The `LG(...)` layers are macOS-oriented (Cmd; Win key on Windows). If adding
   Windows/Linux variants, keep the macOS ones and document the host assumption.
+- Holding the base-layer Lower thumb also holds RGUI (Cmd/Win). Any Lower key
+  that should type without Cmd must be an `nc_*` mod-morph that masks
+  `MOD_RGUI`; a plain `&kp` there gets Cmd added.
+- The LEDs are the gaming indicator (`gaming_on` / `gaming_off`). Don't
+  reintroduce RGB toggling there.
 - Keep the layer `#define`s in `config/reviung41.keymap` in the same order as
   the layer nodes.
 - Every layer has a diagram comment above its `bindings`. Update the diagram in
