@@ -116,6 +116,14 @@
                         bindings = <&kp>, <&kp>;
                 };
 
+                // From the zmk-rgb-battery-indicator module: shows the battery level for 3 s, filling
+                // the LEDs left to right (100% = all 10, 50% = 5): green >= 50%, orange >= 25%, red.
+                bat_ind: battery_indicator {
+                        compatible = "zmk,behavior-rgb-battery-indicator";
+                        #binding-cells = <0>;
+                        leds = <2 1 3 0 4 5 9 6 8 7>; // left to right, without the center LED
+                };
+
                 // Lower-layer keys that drop the Cmd held by the Lower thumb, so they type as plain keys.
                 // Only matters when Lower was held alone long enough for Cmd to come on first.
                 nc_caret: nc_caret { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; bindings = <&kp CARET>, <&kp CARET>; mods = <(MOD_RGUI)>; };
@@ -137,14 +145,56 @@
                 nc_plus: nc_plus { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; bindings = <&kp PLUS>, <&kp PLUS>; mods = <(MOD_RGUI)>; };
         };
 
-        // From the zmk-rgb-layer-indicator module: the underglow shows a color while a layer is
-        // active and goes back to your own RGB settings when it turns off.
+        // Underglow LEDs, by chain index (from the Reviung41 v1.4 KiCad netlist), seen from above:
+        //
+        //         1   0                                  9   8
+        //      2                                                7
+        //           3                10                   6
+        //                      4               5
+        //
+        // From the zmk-rgb-led-overlay module: sits between ZMK's underglow and the real strip,
+        // keeps disabled LEDs out of your RGB effect and blends the indicators below on top,
+        // with fades and animations.
+        led_overlay: led_overlay {
+                compatible = "zmk,led-strip-overlay";
+                led-strip = <&led_strip>;
+                chain-length = <11>;
+                disabled-leds = <10>; // the center LED: off for the effect, indicators may pulse it
+                // x position of each LED in mm (KiCad), so animations move at an even speed
+                led-x = <105 66 43 79 123 166 211 246 223 185 145>;
+        };
+        chosen {
+                zmk,underglow = &led_overlay;
+        };
+
+        // From the zmk-rgb-layer-indicator module: gaming lights the two bottom-middle LEDs purple
+        // while the gaming layer is on. Only toggled layers get a color (see CLAUDE.md).
         rgb_layer_indicator {
                 compatible = "zmk,rgb-layer-indicator";
                 gaming {
                         layer = <_GAMING>;
-                        color-hsb = <270 100 50>; // solid purple, half brightness
+                        color-hsb = <270 100 50>; // purple, half brightness
+                        leds = <4 5>;
                 };
+        };
+
+        // From the zmk-rgb-ble-indicator module: on a Bluetooth profile change, the keyboard is
+        // split left to right into one area per profile in use (paired, plus the active one), and
+        // the active profile's area lights blue for 2 s. 2 profiles = halves, 5 = 2 LEDs each.
+        rgb_ble_indicator {
+                compatible = "zmk,rgb-ble-indicator";
+                leds = <2 1 3 0 4 5 9 6 8 7>; // left to right, without the center LED
+                color-hsb = <240 100 50>;
+        };
+
+        // From the zmk-rgb-media-indicator module, teal: next/prev sweep left-to-right /
+        // right-to-left, volume up/down grow from / shrink to the center, play/pause pulses the
+        // center LED. Screen brightness +/- like volume, in amber.
+        rgb_media_indicator {
+                compatible = "zmk,rgb-media-indicator";
+                color-hsb = <175 100 50>;
+                brightness-color-hsb = <35 100 50>;
+                pulse-leds = <10>;
         };
 
 
@@ -249,13 +299,14 @@
                 util_layer {
 // ---------------------------------------------------------------------------------------------------------------
 // | RGB BRI+ | RGB SAT+ | RGB HUE+ | RGB EFF+ |    | RGB TOG |   |  BT1  | BT2 | BT3 | BT4 | BT5   |  BT CLR  |
-// | RGB BRI- | RGB SAT- | RGB HUE- | RGB EFF- |    |         |   |       |     |     |     |       |  RESET   |
+// | RGB BRI- | RGB SAT- | RGB HUE- | RGB EFF- |    |         |   |BATTERY|     |     |     |       |  RESET   |
 // |   Brgt▼  |  Brgt▲   |   Prev   |   Next   |Vol-|    Vol+ |   |PlayPse|     |     |     |EXT PWR|BOOTLOADER|
 //                               |     |     |Gaming toggle|     |     |
 // BT CLR clears only the selected profile. EXT PWR toggles the external power rail that feeds the RGB LEDs.
+// BATTERY shows the charge level on the right-half LEDs for 3 s.
                         bindings = <
    &rgb_ug RGB_BRI &rgb_ug RGB_SAI &rgb_ug RGB_HUI &rgb_ug RGB_EFF &none &rgb_ug RGB_TOG    &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4 &bt BT_CLR
-   &rgb_ug RGB_BRD &rgb_ug RGB_SAD &rgb_ug RGB_HUD &rgb_ug RGB_EFR &none &none              &none        &none        &none        &none        &none        &sys_reset
+   &rgb_ug RGB_BRD &rgb_ug RGB_SAD &rgb_ug RGB_HUD &rgb_ug RGB_EFR &none &none              &bat_ind     &none        &none        &none        &none        &sys_reset
    &kp C_BRI_DEC  &kp C_BRI_INC  &kp C_PREV &kp C_NEXT  &kp C_VOL_DN &kp C_VOL_UP           &kp C_PLAY_PAUSE  &none        &none        &none    &ext_power EP_TOG        &bootloader
                                                       &trans      &trans       &tog _GAMING        &trans      &trans
                         >;

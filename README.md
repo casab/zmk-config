@@ -2,14 +2,23 @@
 
 ZMK firmware configuration for a Reviung41 keyboard with a nice!nano controller.
 The keymap is built for a computer set to the **Turkish-Q** keyboard layout. It
-uses three modules of its own:
+uses these modules of its own, one feature per repo:
 
 - [`zmk-autoswitch`](https://github.com/casab/zmk-autoswitch): lets the AutoSwitch
   KVM app change the keyboard's Bluetooth profile.
 - [`zmk-lazy-layer-mod`](https://github.com/casab/zmk-lazy-layer-mod): the Lower
   thumb, a layer key that holds Cmd/Win only when held on its own.
+- [`zmk-rgb-led-overlay`](https://github.com/casab/zmk-rgb-led-overlay): per-LED
+  control on top of the underglow (the center LED is turned off; indicators
+  light single LEDs).
 - [`zmk-rgb-layer-indicator`](https://github.com/casab/zmk-rgb-layer-indicator):
-  the purple gaming LED, restoring your own RGB afterwards.
+  the purple gaming LEDs.
+- [`zmk-rgb-ble-indicator`](https://github.com/casab/zmk-rgb-ble-indicator): shows
+  the Bluetooth profile when it changes.
+- [`zmk-rgb-battery-indicator`](https://github.com/casab/zmk-rgb-battery-indicator):
+  shows the battery level on a key press.
+- [`zmk-rgb-media-indicator`](https://github.com/casab/zmk-rgb-media-indicator):
+  animates the LEDs for media and screen-brightness keys.
 
 ## Files
 
@@ -17,7 +26,7 @@ uses three modules of its own:
 | --- | --- |
 | `config/reviung41.keymap` | Layers, key bindings, custom behaviors, Turkish symbol aliases. Each layer has a diagram comment above its bindings. |
 | `config/reviung41.conf` | Feature settings: RGB underglow, Bluetooth transmit power, AutoSwitch. |
-| `config/west.yml` | Which code is fetched: ZMK and the three modules above, all from their `main` branches. |
+| `config/west.yml` | Which code is fetched: ZMK and the modules above, all from their `main` branches. |
 | `build.yaml` | What GitHub Actions builds: board `nice_nano//zmk`, shield `reviung41`. |
 | `.github/workflows/build.yml` | Runs ZMK's shared build workflow on push, pull request, or manual run. |
 
@@ -48,12 +57,12 @@ inner, outer.
 | # | Layer | How to reach it | What's on it |
 | --- | --- | --- | --- |
 | 0 | `_QWERTY` | Default | Letters including Ğ (hold G) and Ü (hold U), Caps Word / Shift, Tab / Ctrl, Backspace / Right Shift. |
-| 1 | `_GAMING` | Util layer, space key. Turn off with the right outer thumb. | Plain Shift, Ctrl and Alt with no tap actions, so they react instantly. The LEDs are solid purple while it's on, then go back to your own RGB. |
+| 1 | `_GAMING` | Util layer, space key. Turn off with the right outer thumb. | Plain Shift, Ctrl and Alt with no tap actions, so they react instantly. The two bottom-middle LEDs are purple while it's on. |
 | 2 | `_LOWER` | Hold the left inner thumb. Held alone, it also holds Cmd (Win on Windows). | Cmd + left-hand keys, plus arrows and symbols on the right. |
 | 3 | `_CMDSHIFT` | On Lower, hold the left key of the middle row | Cmd+Shift+key for every letter. |
 | 4 | `_RAISE` | Hold the right inner thumb | Symbols, Home/End/PgUp/PgDn, Delete. |
 | 5 | `_NUMPAD` | Hold the top-left key | Digits, F1–F12, `= - + * / . ,`. |
-| 6 | `_UTIL` | Hold both inner thumbs | RGB, Bluetooth profiles 1–5 and clear, media, screen brightness, external power, reset, bootloader. |
+| 6 | `_UTIL` | Hold both inner thumbs | RGB, Bluetooth profiles 1–5 and clear, battery level, media, screen brightness, external power, reset, bootloader. |
 
 ### Base layer
 
@@ -124,7 +133,11 @@ keycodes type the same characters on both (`< > |` confirmed on each).
 | `mmlic` | Mod-morph | | `,`/Lower that becomes `;` with Right Shift |
 | `lwr_cmd` + `lazy_cmd` | Hold-tap, tap-preferred + lazy layer-mod (module) | 200 ms + 100 ms | The Lower thumb: tap `,`; hold Lower, plus Cmd when held alone |
 | `nc_*` | Mod-morph | | Lower's right-half symbols and arrows, dropping Cmd if it's already down |
-| `rgb_layer_indicator` | Node (module) | | Solid purple underglow while the gaming layer is on |
+| `led_overlay` | Node (module) | | Per-LED layer between the underglow and the strip; keeps LED 10 (center) off |
+| `rgb_layer_indicator` | Node (module) | | LEDs 4 and 5 purple while the gaming layer is on |
+| `rgb_ble_indicator` | Node (module) | 2 s | Bluetooth profile change lights the active profile's area blue |
+| `bat_ind` | Behavior (module) | 3 s | Util key: battery level as a left-to-right gauge |
+| `rgb_media_indicator` | Node (module) | 350 ms | Media and brightness keys animate the LEDs |
 
 ## AutoSwitch
 
@@ -143,16 +156,41 @@ switches. It's turned on by `CONFIG_ZMK_AUTOSWITCH=y` in `reviung41.conf`.
 
 All in `config/reviung41.conf`.
 
-- **RGB underglow** is yours to set with the RGB keys on the Util layer. While
-  the gaming layer is on it shows solid purple, then goes back to exactly your
-  settings (on/off, color, effect). Changes made during gaming are undone when
-  gaming ends. The LEDs turn off after 30 seconds without a keypress, and any key
-  brings them back. **EXT PWR** cuts power to the LEDs.
+- **RGB underglow** is yours to set with the RGB keys on the Util layer. It
+  turns off after 30 seconds without a keypress, and any key brings it back.
+  **EXT PWR** cuts power to the LEDs.
+- **Single LEDs.** The 11 LEDs are numbered along the strip's wiring (from the
+  Reviung41 v1.4 KiCad netlist), seen from above:
+
+  ```
+          1   0                                  9   8
+       2                                                7
+            3                10                   6
+                       4               5
+  ```
+
+  - LED 10, in the center, is left out of your RGB effect. Only the play/pause
+    pulse and passing animations light it briefly.
+  - Indicators fade in and out instead of switching.
+  - Gaming on: LEDs 4 and 5 are purple. Your own RGB stays on the rest.
+  - Left to right, the 10 lit LEDs are 2, 1, 3, 0, 4, 5, 9, 6, 8, 7.
+  - Bluetooth profile change (key or AutoSwitch): the keyboard is split left to
+    right into one area per profile in use (paired profiles, plus the active one
+    if it's empty), and the active profile's area lights blue for 2 s. Two
+    profiles in use: halves. Three: thirds. Five: 2 LEDs each.
+  - **BATTERY** key on the Util layer (under BT1): fills the LEDs left to right
+    for 3 s, 100% = all 10, 50% = 5. Green from 50%, orange from 25%, red below.
+  - Media keys (teal, about 0.35 s): next track sweeps left to right, previous
+    right to left, volume up grows from the center, volume down shrinks into
+    it, play/pause pulses the center LED. Screen brightness +/- animate like
+    volume, in amber.
+  - Indicators show even when your RGB is off: the LEDs get power just for
+    them. While the keyboard is idle they're hidden.
 - **Deep sleep** after 15 minutes without a keypress. Any key wakes the keyboard,
   and that key isn't typed. It never sleeps while plugged into USB power. While
   asleep it isn't connected to any computer, so AutoSwitch can't move it to
   another profile until it wakes. Waking restarts the keyboard on the base
-  layer; if it fell asleep while gaming, your own RGB comes back at boot.
+  layer.
 - **Bluetooth transmit power** is raised to +8 dBm for range, which uses more
   battery.
 - **Experimental Bluetooth features** (`CONFIG_ZMK_BLE_EXPERIMENTAL_FEATURES`):

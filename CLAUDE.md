@@ -79,9 +79,34 @@ GitHub Actions fetches them through `west.yml` without credentials.
 
 - `zmk-lazy-layer-mod`: `zmk,behavior-lazy-layer-mod` (layer + modifier only
   when held alone; `keycode`, `delay-ms`, `tap-on-release`).
+- `zmk-rgb-led-overlay`: `zmk,led-strip-overlay` node that `zmk,underglow`
+  points at; sits between ZMK's underglow and the real strip. `disabled-leds`
+  (out of the underglow effect only; indicators may still light them),
+  `led-x` (positions in mm, for animations), `identify`. C API for indicator
+  modules: `set/set_delayed/clear/commit` (static LEDs, fade in/out, diffed so
+  repaints don't flicker) and `animate` (sweep/ring/pulse); slots are blended
+  in order, higher on top. Powers the LEDs for indicators when the RGB is off;
+  hides them while idle.
 - `zmk-rgb-layer-indicator`: `zmk,rgb-layer-indicator` node, child per layer
-  (`layer`, `color-hsb`, `effect`); restores the user's RGB and also undoes a
-  leftover indicator at boot.
+  (`layer`, `color-hsb`, `effect`, optional `leds`). With `leds` it paints those
+  LEDs through the overlay (slot 0); without, it takes over the whole underglow
+  and restores the user's RGB (also at boot).
+- `zmk-rgb-ble-indicator`: `zmk,rgb-ble-indicator` node; `leds` (left to right)
+  split into one area per profile in use (paired + active), active area lit
+  (slot 3).
+- `zmk-rgb-battery-indicator`: `zmk,behavior-rgb-battery-indicator` behavior
+  (`&bat_ind` on Util); left-to-right gauge on `leds`, green >= 50%, orange >=
+  25%, red below (slot 2).
+- `zmk-rgb-media-indicator`: `zmk,rgb-media-indicator` node; watches consumer
+  keycodes (no keymap bindings): next/prev sweep, vol/brightness rings,
+  play/pause pulses `pulse-leds` (slot 4). Teal media, amber brightness. Media
+  state (playing, volume level) is unknowable to the keyboard, so animations
+  show the key pressed, never a state.
+
+LED indexes follow the strip wiring, not position. The map (from the Reviung41
+v1.4 KiCad netlist, gtips/reviung) is drawn in the keymap above `led_overlay`:
+left half 0-4, right half 5-9, 10 is the center (disabled, the user dislikes
+it).
 
 To build this config against local, unpushed module changes, mount the module
 folders into the Docker build and pass `-DZMK_EXTRA_MODULES="<dir1>;<dir2>"`.

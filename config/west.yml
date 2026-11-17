@@ -19,9 +19,29 @@ manifest:
     - name: zmk-lazy-layer-mod
       remote: casab
       revision: main
-    # Gaming LED: underglow color per active layer, restoring your own RGB afterwards
+    # Per-LED control between the underglow and the strip: disabled LEDs, indicators on top
+    # (https://github.com/casab/zmk-rgb-led-overlay).
+    - name: zmk-rgb-led-overlay
+      remote: casab
+      revision: main
+    # Gaming LED: color per active layer, on chosen LEDs
     # (https://github.com/casab/zmk-rgb-layer-indicator).
     - name: zmk-rgb-layer-indicator
+      remote: casab
+      revision: main
+    # Bluetooth profile shown on LEDs when it changes
+    # (https://github.com/casab/zmk-rgb-ble-indicator).
+    - name: zmk-rgb-ble-indicator
+      remote: casab
+      revision: main
+    # Battery level shown on LEDs on a key press
+    # (https://github.com/casab/zmk-rgb-battery-indicator).
+    - name: zmk-rgb-battery-indicator
+      remote: casab
+      revision: main
+    # Media and screen-brightness keys animate the LEDs
+    # (https://github.com/casab/zmk-rgb-media-indicator).
+    - name: zmk-rgb-media-indicator
       remote: casab
       revision: main
   self:
