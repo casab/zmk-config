@@ -22,11 +22,12 @@ keymap for a Turkish-Q host layout and the `zmk-autoswitch` module.
 - Holding the base-layer Lower thumb also holds RGUI (Cmd/Win). Any Lower key
   that should type without Cmd must be an `nc_*` mod-morph that masks
   `MOD_RGUI`; a plain `&kp` there gets Cmd added.
-- `lower_cmd` must keep `wait-ms` and `tap-ms` at 0 and must not tap a
-  modifier. ZMK only runs a macro synchronously up to its first delay; after
-  that, the keys the hold-tap held back are replayed while the macro is still
-  running. A Right Ctrl tap with `tap-ms = <10>` once turned fast `?` and Cmd+A
-  into Ctrl+`?` and Ctrl+Cmd+A.
+- `lower_cmd` only presses and releases `&mo _LOWER` and `RGUI`. Don't add
+  delays or extra key taps to it (the user rejected Start-menu "neutralizer"
+  taps; a Win tap opening Start is fine). ZMK runs a macro synchronously only up
+  to its first delay, and the keys the hold-tap held back are replayed right
+  after, so anything slower lands on those keys. A Right Ctrl tap with
+  `tap-ms = <10>` once turned fast `?` and Cmd+A into Ctrl+`?` and Ctrl+Cmd+A.
 - The LEDs are the gaming indicator (`gaming_on` / `gaming_off`). Don't
   reintroduce RGB toggling there.
 - Keep the layer `#define`s in `config/reviung41.keymap` in the same order as

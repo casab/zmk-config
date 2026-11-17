@@ -64,11 +64,10 @@
                         bindings = <&kp>, <&kp>;
                 };
                 // Hold: Lower layer + Cmd (RGUI; Win on Windows), so Cmd+click and Cmd+left-hand keys work.
-                // The F24 taps keep Windows from opening the Start menu when the Win key is released.
-                // wait-ms and tap-ms must stay 0: then ZMK runs every step immediately, before the keys
-                // the hold-tap held back are replayed. Any delay lets those keys land mid-macro (the old
-                // Right Ctrl tap with tap-ms 10 turned fast ? and Cmd+A into Ctrl+? and Ctrl+Cmd+A).
-                // F24 isn't a modifier, so it can't change another key even if they overlap.
+                // Nothing else is sent: like a real Win key, holding and releasing it alone may open Start.
+                // wait-ms must stay 0 and no taps may be added: ZMK runs a macro immediately only up to
+                // its first delay, and the keys the hold-tap held back are replayed right after. Earlier
+                // extra taps landed on those keys (a Right Ctrl tap turned fast ? into Ctrl+?).
                 lower_cmd: lower_cmd {
                         compatible = "zmk,behavior-macro";
                         #binding-cells = <0>;
@@ -76,9 +75,7 @@
                         tap-ms = <0>;
                         bindings
                                 = <&macro_press &mo _LOWER &kp RGUI>
-                                , <&macro_tap &kp F24>
                                 , <&macro_pause_for_release>
-                                , <&macro_tap &kp F24>
                                 , <&macro_release &kp RGUI &mo _LOWER>;
                 };
                 // Same timing as the stock &lt: tap-preferred, 200 ms.

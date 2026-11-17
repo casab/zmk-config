@@ -64,10 +64,8 @@ inner, outer.
   opens Lower **and holds Cmd**, like the Cmd key on a Mac keyboard, so Cmd+click
   and Cmd + left-hand keys work. The symbols and arrows on Lower's right half
   drop that Cmd and type normally. Cmd starts after the usual 200 ms hold.
-  - On Windows this Cmd is the Win key. The keyboard taps F24 (a key that does
-    nothing) right after pressing Win and again before releasing it, so Windows
-    doesn't open the Start menu. If Start still pops up while you type Lower
-    symbols, that mitigation isn't enough and the design needs changing.
+  - On Windows this Cmd is the Win key, and it acts like one: holding Lower and
+    releasing it without another key may open the Start menu.
   - From the gaming layer, Lower doesn't hold Cmd/Win.
 - `CpsW` is Caps Word: it capitalizes letters until you type a non-letter.
   `_` keeps it going, so `MY_CONSTANT` works. (On Turkish-Q, `_` is the `PLUS`
@@ -111,7 +109,7 @@ keycodes type the same characters on both (`< > |` confirmed on each).
 | `prog_caps` | Caps Word | | Caps Word that continues through `_` (`PLUS` keycode) |
 | `mmnet` | Mod-morph | | Esc/Npd that becomes Tab with a left modifier |
 | `mmlic` | Mod-morph | | `,`/Lower that becomes `;` with Right Shift |
-| `lwr_cmd` + `lower_cmd` | Hold-tap, tap-preferred + macro | 200 ms | The Lower thumb: tap `,`, hold Lower + Cmd (with F24 taps against the Windows Start menu) |
+| `lwr_cmd` + `lower_cmd` | Hold-tap, tap-preferred + macro | 200 ms | The Lower thumb: tap `,`, hold Lower + Cmd |
 | `nc_*` | Mod-morph | | Lower's right-half symbols and arrows with the Lower thumb's Cmd removed |
 | `gaming_on` / `gaming_off` | Macro | | Turn the gaming layer on with solid purple LEDs / off with LEDs off |
 
