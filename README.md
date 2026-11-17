@@ -72,13 +72,13 @@ inner, outer.
   - Use any key while holding it (a symbol, an arrow, `⌘C`...) and no extra Cmd
     is sent. Symbols and arrows type plainly; the left-hand `⌘` keys send their
     own Cmd. On Windows, nothing here opens the Start menu.
-  - Keep holding it alone for another 300 ms (0.5 s in total) and Cmd goes down,
+  - Keep holding it alone for another 100 ms (0.3 s in total) and Cmd goes down,
     so you can Cmd+click with the mouse. Shift doesn't cancel it, so
     Cmd+Shift+click works.
   - Release it alone before that and it taps Cmd/Win, like a quick press of the
     Win key (on Windows that opens Start).
   - If Cmd is already down and you then type a symbol, the symbol drops Cmd; on
-    Windows that can still open Start. Type symbols before the 0.5 s to avoid it.
+    Windows that can still open Start. Type symbols before the 0.3 s to avoid it.
   - From the gaming layer, Lower never holds Cmd/Win.
 - `CpsW` is Caps Word: it capitalizes letters until you type a non-letter.
   `_` keeps it going, so `MY_CONSTANT` works. (On Turkish-Q, `_` is the `PLUS`
@@ -122,7 +122,7 @@ keycodes type the same characters on both (`< > |` confirmed on each).
 | `prog_caps` | Caps Word | | Caps Word that continues through `_` (`PLUS` keycode) |
 | `mmnet` | Mod-morph | | Esc/Npd that becomes Tab with a left modifier |
 | `mmlic` | Mod-morph | | `,`/Lower that becomes `;` with Right Shift |
-| `lwr_cmd` + `lazy_cmd` | Hold-tap, tap-preferred + lazy layer-mod (module) | 200 ms + 300 ms | The Lower thumb: tap `,`; hold Lower, plus Cmd when held alone |
+| `lwr_cmd` + `lazy_cmd` | Hold-tap, tap-preferred + lazy layer-mod (module) | 200 ms + 100 ms | The Lower thumb: tap `,`; hold Lower, plus Cmd when held alone |
 | `nc_*` | Mod-morph | | Lower's right-half symbols and arrows, dropping Cmd if it's already down |
 | `rgb_layer_indicator` | Node (module) | | Solid purple underglow while the gaming layer is on |
 

@@ -71,7 +71,7 @@
                         compatible = "zmk,behavior-lazy-layer-mod";
                         #binding-cells = <1>;
                         keycode = <RGUI>;
-                        delay-ms = <300>;
+                        delay-ms = <100>; // + the 200 ms tapping term = Cmd 300 ms after pressing
                         tap-on-release;
                 };
                 // Same timing as the stock &lt: tap-preferred, 200 ms. Hold param is the layer.
