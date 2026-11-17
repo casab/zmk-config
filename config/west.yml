@@ -14,5 +14,15 @@ manifest:
     - name: zmk-autoswitch
       remote: casab
       revision: main
+    # Lower thumb: a layer key that holds Cmd/Win only when held on its own
+    # (https://github.com/casab/zmk-lazy-layer-mod).
+    - name: zmk-lazy-layer-mod
+      remote: casab
+      revision: main
+    # Gaming LED: underglow color per active layer, restoring your own RGB afterwards
+    # (https://github.com/casab/zmk-rgb-layer-indicator).
+    - name: zmk-rgb-layer-indicator
+      remote: casab
+      revision: main
   self:
     path: config

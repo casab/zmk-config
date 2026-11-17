@@ -1,9 +1,15 @@
 # Reviung41 ZMK Config
 
 ZMK firmware configuration for a Reviung41 keyboard with a nice!nano controller.
-The keymap is built for a computer set to the **Turkish-Q** keyboard layout, and
-it includes the [AutoSwitch](https://github.com/casab/zmk-autoswitch) module so
-the AutoSwitch KVM app can change the keyboard's Bluetooth profile.
+The keymap is built for a computer set to the **Turkish-Q** keyboard layout. It
+uses three modules of its own:
+
+- [`zmk-autoswitch`](https://github.com/casab/zmk-autoswitch): lets the AutoSwitch
+  KVM app change the keyboard's Bluetooth profile.
+- [`zmk-lazy-layer-mod`](https://github.com/casab/zmk-lazy-layer-mod): the Lower
+  thumb, a layer key that holds Cmd/Win only when held on its own.
+- [`zmk-rgb-layer-indicator`](https://github.com/casab/zmk-rgb-layer-indicator):
+  the purple gaming LED, restoring your own RGB afterwards.
 
 ## Files
 
@@ -11,7 +17,7 @@ the AutoSwitch KVM app can change the keyboard's Bluetooth profile.
 | --- | --- |
 | `config/reviung41.keymap` | Layers, key bindings, custom behaviors, Turkish symbol aliases. Each layer has a diagram comment above its bindings. |
 | `config/reviung41.conf` | Feature settings: RGB underglow, Bluetooth transmit power, AutoSwitch. |
-| `config/west.yml` | Which code is fetched: ZMK and `zmk-autoswitch`, both from their `main` branches. |
+| `config/west.yml` | Which code is fetched: ZMK and the three modules above, all from their `main` branches. |
 | `build.yaml` | What GitHub Actions builds: board `nice_nano//zmk`, shield `reviung41`. |
 | `.github/workflows/build.yml` | Runs ZMK's shared build workflow on push, pull request, or manual run. |
 
@@ -42,8 +48,8 @@ inner, outer.
 | # | Layer | How to reach it | What's on it |
 | --- | --- | --- | --- |
 | 0 | `_QWERTY` | Default | Letters including Ğ (hold G) and Ü (hold U), Caps Word / Shift, Tab / Ctrl, Backspace / Right Shift. |
-| 1 | `_GAMING` | Util layer, space key. Turn off with the right outer thumb. | Plain Shift, Ctrl and Alt with no tap actions, so they react instantly. The LEDs are solid purple while it's on and off when you leave it. |
-| 2 | `_LOWER` | Hold the left inner thumb. This also holds Cmd (Win on Windows). | Cmd + left-hand keys, plus arrows and symbols on the right, which type without Cmd. |
+| 1 | `_GAMING` | Util layer, space key. Turn off with the right outer thumb. | Plain Shift, Ctrl and Alt with no tap actions, so they react instantly. The LEDs are solid purple while it's on, then go back to your own RGB. |
+| 2 | `_LOWER` | Hold the left inner thumb. Held alone, it also holds Cmd (Win on Windows). | Cmd + left-hand keys, plus arrows and symbols on the right. |
 | 3 | `_CMDSHIFT` | On Lower, hold the left key of the middle row | Cmd+Shift+key for every letter. |
 | 4 | `_RAISE` | Hold the right inner thumb | Symbols, Home/End/PgUp/PgDn, Delete. |
 | 5 | `_NUMPAD` | Hold the top-left key | Digits, F1–F12, `= - + * / . ,`. |
@@ -61,12 +67,19 @@ inner, outer.
 - `Esc/Npd` types Tab instead of Esc while a left modifier is held, so
   Cmd+Tab and Shift+Tab work from that key.
 - `,/Lwr⌘` types `,` when tapped, and `;` while Right Shift is held. Held, it
-  opens Lower **and holds Cmd**, like the Cmd key on a Mac keyboard, so Cmd+click
-  and Cmd + left-hand keys work. The symbols and arrows on Lower's right half
-  drop that Cmd and type normally. Cmd starts after the usual 200 ms hold.
-  - On Windows this Cmd is the Win key, and it acts like one: holding Lower and
-    releasing it without another key may open the Start menu.
-  - From the gaming layer, Lower doesn't hold Cmd/Win.
+  opens Lower after the usual 200 ms. It also acts as Cmd, but **only when held
+  on its own** (the `zmk-lazy-layer-mod` module):
+  - Use any key while holding it (a symbol, an arrow, `⌘C`...) and no extra Cmd
+    is sent. Symbols and arrows type plainly; the left-hand `⌘` keys send their
+    own Cmd. On Windows, nothing here opens the Start menu.
+  - Keep holding it alone for another 300 ms (0.5 s in total) and Cmd goes down,
+    so you can Cmd+click with the mouse. Shift doesn't cancel it, so
+    Cmd+Shift+click works.
+  - Release it alone before that and it taps Cmd/Win, like a quick press of the
+    Win key (on Windows that opens Start).
+  - If Cmd is already down and you then type a symbol, the symbol drops Cmd; on
+    Windows that can still open Start. Type symbols before the 0.5 s to avoid it.
+  - From the gaming layer, Lower never holds Cmd/Win.
 - `CpsW` is Caps Word: it capitalizes letters until you type a non-letter.
   `_` keeps it going, so `MY_CONSTANT` works. (On Turkish-Q, `_` is the `PLUS`
   keycode, which is why the keymap's continue list names `PLUS`.)
@@ -109,9 +122,9 @@ keycodes type the same characters on both (`< > |` confirmed on each).
 | `prog_caps` | Caps Word | | Caps Word that continues through `_` (`PLUS` keycode) |
 | `mmnet` | Mod-morph | | Esc/Npd that becomes Tab with a left modifier |
 | `mmlic` | Mod-morph | | `,`/Lower that becomes `;` with Right Shift |
-| `lwr_cmd` + `lower_cmd` | Hold-tap, tap-preferred + macro | 200 ms | The Lower thumb: tap `,`, hold Lower + Cmd |
-| `nc_*` | Mod-morph | | Lower's right-half symbols and arrows with the Lower thumb's Cmd removed |
-| `gaming_on` / `gaming_off` | Macro | | Turn the gaming layer on with solid purple LEDs / off with LEDs off |
+| `lwr_cmd` + `lazy_cmd` | Hold-tap, tap-preferred + lazy layer-mod (module) | 200 ms + 300 ms | The Lower thumb: tap `,`; hold Lower, plus Cmd when held alone |
+| `nc_*` | Mod-morph | | Lower's right-half symbols and arrows, dropping Cmd if it's already down |
+| `rgb_layer_indicator` | Node (module) | | Solid purple underglow while the gaming layer is on |
 
 ## AutoSwitch
 
@@ -130,16 +143,16 @@ switches. It's turned on by `CONFIG_ZMK_AUTOSWITCH=y` in `reviung41.conf`.
 
 All in `config/reviung41.conf`.
 
-- **RGB underglow** is the gaming indicator: solid purple on the gaming layer,
-  off otherwise. It turns itself off after 30 seconds without a keypress, and
-  any key brings it back. The RGB keys on the Util layer still work, and
-  **EXT PWR** cuts power to the LEDs.
+- **RGB underglow** is yours to set with the RGB keys on the Util layer. While
+  the gaming layer is on it shows solid purple, then goes back to exactly your
+  settings (on/off, color, effect). Changes made during gaming are undone when
+  gaming ends. The LEDs turn off after 30 seconds without a keypress, and any key
+  brings them back. **EXT PWR** cuts power to the LEDs.
 - **Deep sleep** after 15 minutes without a keypress. Any key wakes the keyboard,
   and that key isn't typed. It never sleeps while plugged into USB power. While
   asleep it isn't connected to any computer, so AutoSwitch can't move it to
   another profile until it wakes. Waking restarts the keyboard on the base
-  layer, but the LED state is saved. If it fell asleep while gaming, the LEDs
-  stay purple after waking. Turn gaming on and off once to fix that.
+  layer; if it fell asleep while gaming, your own RGB comes back at boot.
 - **Bluetooth transmit power** is raised to +8 dBm for range, which uses more
   battery.
 - **Experimental Bluetooth features** (`CONFIG_ZMK_BLE_EXPERIMENTAL_FEATURES`):

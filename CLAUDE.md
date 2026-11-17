@@ -19,17 +19,22 @@ keymap for a Turkish-Q host layout and the `zmk-autoswitch` module.
   `GRAVE` = `" é` and `NON_US_BSLH` = `< > |` on both (confirmed by the user).
 - The `LG(...)` layers are macOS-oriented (Cmd; Win key on Windows). If adding
   Windows/Linux variants, keep the macOS ones and document the host assumption.
-- Holding the base-layer Lower thumb also holds RGUI (Cmd/Win). Any Lower key
-  that should type without Cmd must be an `nc_*` mod-morph that masks
-  `MOD_RGUI`; a plain `&kp` there gets Cmd added.
-- `lower_cmd` only presses and releases `&mo _LOWER` and `RGUI`. Don't add
-  delays or extra key taps to it (the user rejected Start-menu "neutralizer"
-  taps; a Win tap opening Start is fine). ZMK runs a macro synchronously only up
-  to its first delay, and the keys the hold-tap held back are replayed right
-  after, so anything slower lands on those keys. A Right Ctrl tap with
-  `tap-ms = <10>` once turned fast `?` and Cmd+A into Ctrl+`?` and Ctrl+Cmd+A.
-- The LEDs are the gaming indicator (`gaming_on` / `gaming_off`). Don't
-  reintroduce RGB toggling there.
+- The base-layer Lower thumb is `lwr_cmd` (hold-tap) whose hold is `lazy_cmd`
+  from `zmk-lazy-layer-mod`: the user's rule is that Cmd/Win is held **only when
+  Lower is held alone**, never added to a key used during the hold. Lower keys
+  that need Cmd send it themselves (`LG(...)`). Right-half symbols/arrows are
+  `nc_*` mod-morphs masking `MOD_RGUI`, which only matters if Cmd already went
+  down after `delay-ms`.
+- Don't send extra keys around Cmd/Win (the user rejected Start-menu
+  "neutralizer" taps: Ctrl and F24). A Win tap opening Start is fine. Lessons:
+  ZMK macros run synchronously only up to their first delay, and a hold-tap
+  replays held-back keys right after its hold binding, so a macro hold binding
+  with taps once turned fast `?` and Cmd+A into Ctrl+`?` and Ctrl+Cmd+A; and
+  Windows opens Start the moment a lone Win is released, even when the release
+  shares a report with the next key.
+- The gaming LED comes from `zmk-rgb-layer-indicator` (`rgb_layer_indicator`
+  node). Don't set RGB from keymap macros: the user's own RGB settings must
+  survive gaming.
 - Keep the layer `#define`s in `config/reviung41.keymap` in the same order as
   the layer nodes.
 - Every layer has a diagram comment above its `bindings`. Update the diagram in
@@ -48,7 +53,8 @@ keymap for a Turkish-Q host layout and the `zmk-autoswitch` module.
 - Changes that alter HID descriptors or pairing (NKRO, HID indicators, USB boot,
   passkey/security options, AutoSwitch HID) force the user to re-pair every
   computer. Say so before making them.
-- `config/west.yml` - ZMK `main` plus `zmk-autoswitch` `main` (casab remote).
+- `config/west.yml` - ZMK `main` plus `zmk-autoswitch`, `zmk-lazy-layer-mod`
+  and `zmk-rgb-layer-indicator`, all `main` (casab remote).
 - `build.yaml` - build matrix: `nice_nano//zmk` + `reviung41`.
 - `.github/workflows/build.yml` - ZMK's shared `build-user-config.yml@main`.
 
@@ -59,6 +65,22 @@ vendor HID interface so the AutoSwitch KVM app can select Bluetooth profiles.
 Changes to its HID interface mean the user must re-pair on every computer after
 flashing; say so whenever a change affects it. Its options are documented in the
 module's README.
+
+## Own modules
+
+Each feature lives in its own repo under `github.com/casab`, local clones next
+to this one in `codejunk/` (the user wants one repo per module, like
+`zmk-autoswitch`, never several features combined). They must stay public:
+GitHub Actions fetches them through `west.yml` without credentials.
+
+- `zmk-lazy-layer-mod`: `zmk,behavior-lazy-layer-mod` (layer + modifier only
+  when held alone; `keycode`, `delay-ms`, `tap-on-release`).
+- `zmk-rgb-layer-indicator`: `zmk,rgb-layer-indicator` node, child per layer
+  (`layer`, `color-hsb`, `effect`); restores the user's RGB and also undoes a
+  leftover indicator at boot.
+
+To build this config against local, unpushed module changes, mount the module
+folders into the Docker build and pass `-DZMK_EXTRA_MODULES="<dir1>;<dir2>"`.
 
 ## Validation
 
