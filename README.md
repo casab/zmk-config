@@ -185,7 +185,9 @@ All in `config/reviung41.conf`.
     it, play/pause pulses the center LED. Screen brightness +/- animate like
     volume, in amber.
   - Indicators show even when your RGB is off: the LEDs get power just for
-    them. While the keyboard is idle they're hidden.
+    them. While the keyboard is idle, the gaming LEDs are hidden, but the
+    temporary ones (Bluetooth, battery, media) still show, so a KVM switch
+    after a break still flashes the profile.
 - **Deep sleep** after 15 minutes without a keypress. Any key wakes the keyboard,
   and that key isn't typed. It never sleeps while plugged into USB power. While
   asleep it isn't connected to any computer, so AutoSwitch can't move it to

@@ -57,8 +57,8 @@ keymap for a Turkish-Q host layout and the `zmk-autoswitch` module.
 - Changes that alter HID descriptors or pairing (NKRO, HID indicators, USB boot,
   passkey/security options, AutoSwitch HID) force the user to re-pair every
   computer. Say so before making them.
-- `config/west.yml` - ZMK `main` plus `zmk-autoswitch`, `zmk-lazy-layer-mod`
-  and `zmk-rgb-layer-indicator`, all `main` (casab remote).
+- `config/west.yml` - ZMK `main` plus the own modules below and
+  `zmk-autoswitch`, all `main` (casab remote).
 - `build.yaml` - build matrix: `nice_nano//zmk` + `reviung41`.
 - `.github/workflows/build.yml` - ZMK's shared `build-user-config.yml@main`.
 
@@ -85,8 +85,10 @@ GitHub Actions fetches them through `west.yml` without credentials.
   `led-x` (positions in mm, for animations), `identify`. C API for indicator
   modules: `set/set_delayed/clear/commit` (static LEDs, fade in/out, diffed so
   repaints don't flicker) and `animate` (sweep/ring/pulse); slots are blended
-  in order, higher on top. Powers the LEDs for indicators when the RGB is off;
-  hides them while idle.
+  in order, higher on top. Powers the LEDs for indicators when the RGB is off.
+  While idle it hides persistent slots (gaming) but shows slots marked
+  `set_show_when_idle` (BLE, battery) and animations: a KVM switch changes the
+  profile without a keypress, while the keyboard is idle.
 - `zmk-rgb-layer-indicator`: `zmk,rgb-layer-indicator` node, child per layer
   (`layer`, `color-hsb`, `effect`, optional `leds`). With `leds` it paints those
   LEDs through the overlay (slot 0); without, it takes over the whole underglow
