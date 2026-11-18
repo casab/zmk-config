@@ -192,12 +192,13 @@
 
         // From the zmk-rgb-media-indicator module, teal: next/prev sweep left-to-right /
         // right-to-left, volume up/down grow from / shrink to the center, play/pause pulses the
-        // center LED. Screen brightness +/- like volume, in amber.
+        // center LED. Screen brightness +/- like volume, in amber. Sweeps and rings skip the center LED.
         rgb_media_indicator {
                 compatible = "zmk,rgb-media-indicator";
                 color-hsb = <175 100 50>;
                 brightness-color-hsb = <35 100 50>;
                 pulse-leds = <10>;
+                skip-leds = <10>;
         };
 
 

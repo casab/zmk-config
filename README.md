@@ -80,7 +80,9 @@ inner, outer.
   on its own** (the `zmk-lazy-layer-mod` module):
   - Use any key while holding it (a symbol, an arrow, `⌘C`...) and no extra Cmd
     is sent. Symbols and arrows type plainly; the left-hand `⌘` keys send their
-    own Cmd. On Windows, nothing here opens the Start menu.
+    own Cmd. On Windows, nothing here opens the Start menu. A key counts from
+    the moment it's pressed, so holding Raise for Util (which only turns on
+    after Raise's own 200 ms) doesn't let Cmd in either.
   - Keep holding it alone for another 100 ms (0.3 s in total) and Cmd goes down,
     so you can Cmd+click with the mouse.
   - Ctrl, Shift or Alt held together with it (before Cmd goes down) also keep
@@ -185,7 +187,7 @@ All in `config/reviung41.conf`.
   - Media keys (teal, about 0.35 s): next track sweeps left to right, previous
     right to left, volume up grows from the center, volume down shrinks into
     it, play/pause pulses the center LED. Screen brightness +/- animate like
-    volume, in amber.
+    volume, in amber. Sweeps and rings leave the center LED out.
   - Indicators show even when your RGB is off: the LEDs get power just for
     them. While the keyboard is idle, the gaming LEDs are hidden, but the
     temporary ones (Bluetooth, battery, media) still show, so a KVM switch

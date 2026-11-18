@@ -24,7 +24,8 @@ keymap for a Turkish-Q host layout and the `zmk-autoswitch` module.
   Lower is held alone**, never added to a key used during the hold. Lower keys
   that need Cmd send it themselves (`LG(...)`). Other modifiers count as
   "combined" too (`cancel-on-modifiers`): Ctrl/Shift/Alt + Lower must never add
-  Cmd. Right-half symbols/arrows are
+  Cmd. Any other key counts from its press, not from what it later sends, so
+  Lower + held Raise (a layer-tap, Util after its tapping term) adds no Cmd. Right-half symbols/arrows are
   `nc_*` mod-morphs masking `MOD_RGUI`, which only matters if Cmd already went
   down after `delay-ms`.
 - Don't send extra keys around Cmd/Win (the user rejected Start-menu
@@ -104,7 +105,8 @@ GitHub Actions fetches them through `west.yml` without credentials.
   25%, red below (slot 2).
 - `zmk-rgb-media-indicator`: `zmk,rgb-media-indicator` node; watches consumer
   keycodes (no keymap bindings): next/prev sweep, vol/brightness rings,
-  play/pause pulses `pulse-leds` (slot 4). Teal media, amber brightness. Media
+  play/pause pulses `pulse-leds`, sweeps/rings leave out `skip-leds` (the
+  center LED, at the user's request) (slot 4). Teal media, amber brightness. Media
   state (playing, volume level) is unknowable to the keyboard, so animations
   show the key pressed, never a state.
 
