@@ -22,7 +22,9 @@ keymap for a Turkish-Q host layout and the `zmk-autoswitch` module.
 - The base-layer Lower thumb is `lwr_cmd` (hold-tap) whose hold is `lazy_cmd`
   from `zmk-lazy-layer-mod`: the user's rule is that Cmd/Win is held **only when
   Lower is held alone**, never added to a key used during the hold. Lower keys
-  that need Cmd send it themselves (`LG(...)`). Right-half symbols/arrows are
+  that need Cmd send it themselves (`LG(...)`). Other modifiers count as
+  "combined" too (`cancel-on-modifiers`): Ctrl/Shift/Alt + Lower must never add
+  Cmd. Right-half symbols/arrows are
   `nc_*` mod-morphs masking `MOD_RGUI`, which only matters if Cmd already went
   down after `delay-ms`.
 - Don't send extra keys around Cmd/Win (the user rejected Start-menu
@@ -78,7 +80,8 @@ to this one in `codejunk/` (the user wants one repo per module, like
 GitHub Actions fetches them through `west.yml` without credentials.
 
 - `zmk-lazy-layer-mod`: `zmk,behavior-lazy-layer-mod` (layer + modifier only
-  when held alone; `keycode`, `delay-ms`, `tap-on-release`).
+  when held alone; `keycode`, `delay-ms`, `tap-on-release`,
+  `cancel-on-modifiers`).
 - `zmk-rgb-led-overlay`: `zmk,led-strip-overlay` node that `zmk,underglow`
   points at; sits between ZMK's underglow and the real strip. `disabled-leds`
   (out of the underglow effect only; indicators may still light them),

@@ -67,12 +67,15 @@
                 // (RGUI; Win on Windows) is held only if Lower is held alone for delay-ms. Any other key
                 // or layer used during the hold keeps Cmd out, so symbols never touch Win on Windows.
                 // Released alone before delay-ms, it taps Cmd/Win (on Windows that opens Start).
+                // Ctrl/Shift/Alt held with it (before Cmd goes down) also keep Cmd out: Ctrl + Lower
+                // is not Ctrl + Cmd. Use ⌘Ctl, ⌘Alt and the ⇧⌘ layer on Lower for those combos.
                 lazy_cmd: lazy_cmd {
                         compatible = "zmk,behavior-lazy-layer-mod";
                         #binding-cells = <1>;
                         keycode = <RGUI>;
                         delay-ms = <100>; // + the 200 ms tapping term = Cmd 300 ms after pressing
                         tap-on-release;
+                        cancel-on-modifiers;
                 };
                 // Same timing as the stock &lt: tap-preferred, 200 ms. Hold param is the layer.
                 lwr_cmd: lower_command {

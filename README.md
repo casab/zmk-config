@@ -82,8 +82,10 @@ inner, outer.
     is sent. Symbols and arrows type plainly; the left-hand `⌘` keys send their
     own Cmd. On Windows, nothing here opens the Start menu.
   - Keep holding it alone for another 100 ms (0.3 s in total) and Cmd goes down,
-    so you can Cmd+click with the mouse. Shift doesn't cancel it, so
-    Cmd+Shift+click works.
+    so you can Cmd+click with the mouse.
+  - Ctrl, Shift or Alt held together with it (before Cmd goes down) also keep
+    Cmd out: Ctrl + Lower is just Ctrl with the Lower layer, not Ctrl+Cmd. For
+    Cmd combinations use ⌘Ctl, ⌘Alt and the ⇧⌘ layer on Lower.
   - Release it alone before that and it taps Cmd/Win, like a quick press of the
     Win key (on Windows that opens Start).
   - If Cmd is already down and you then type a symbol, the symbol drops Cmd; on
